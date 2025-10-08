@@ -7,6 +7,26 @@
   border-radius: 20px;
   perspective: 800px;
   transition: transform 0.1s ease;
+  position: relative;
+  --x: 50%;
+  --y: 50%;
+}
+
+.card-border {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 22px; /* container radius + border width */
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    hsl(180, 100%, 75%),
+    hsl(240, 100%, 75%),
+    transparent 40%
+  );
+  z-index: 1;
 }
 
 .card {
@@ -20,8 +40,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #333;
   overflow: hidden; /* Ensure media respects the border radius */
+  position: relative;
+  z-index: 2;
 }
 
 .card-content {

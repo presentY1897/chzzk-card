@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import './Card.css';
 
@@ -15,6 +15,8 @@ const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
   const rotateY = useTransform(x, [-100, 100], [-30, 30]);
 
+  const cardRef = useRef<HTMLDivElement>(null);
+
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const width = rect.width;
@@ -28,15 +30,25 @@ const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
 
     x.set(xPct * 200);
     y.set(yPct * 200);
+
+    if (cardRef.current) {
+      cardRef.current.style.setProperty('--x', `${mouseX}px`);
+      cardRef.current.style.setProperty('--y', `${mouseY}px`);
+    }
   };
 
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+    if (cardRef.current) {
+      cardRef.current.style.setProperty('--x', `50%`);
+      cardRef.current.style.setProperty('--y', `50%`);
+    }
   };
 
   return (
     <motion.div
+      ref={cardRef}
       className="card-container"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -46,6 +58,7 @@ const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
         transformStyle: 'preserve-3d',
       }}
     >
+      <div className="card-border"></div>
       <div className="card">
         <div className="card-content">
           {type === 'image' && (
