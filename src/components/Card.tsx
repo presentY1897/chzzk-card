@@ -2,7 +2,13 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import './Card.css';
 
-const Card = () => {
+interface CardProps {
+  type: 'image' | 'video';
+  src: string;
+  alt?: string;
+}
+
+const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -42,8 +48,12 @@ const Card = () => {
     >
       <div className="card">
         <div className="card-content">
-          {/* Image or Video will go here */}
-          <p>Hover over me</p>
+          {type === 'image' && (
+            <img className="card-media" src={src} alt={alt} />
+          )}
+          {type === 'video' && (
+            <video className="card-media" src={src} autoPlay loop muted playsInline />
+          )}
         </div>
       </div>
     </motion.div>
