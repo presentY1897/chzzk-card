@@ -1,0 +1,54 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import './CardDetail.css';
+
+interface CardDetailProps {
+  id: number;
+  type: 'image' | 'video';
+  src: string;
+  alt?: string;
+  title?: string;
+  description?: string;
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary';
+  edition?: string;
+  date?: string;
+  onClick?: () => void;
+}
+
+const CardDetail = ({
+  id,
+  type,
+  src,
+  alt,
+  title,
+  description,
+  rarity,
+  edition,
+  date,
+  onClick
+}: CardDetailProps) => {
+  return (
+    <motion.div className="backdrop" onClick={onClick} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <motion.div className="card-detail-container" layoutId={`card-container-${id}`}>
+        <motion.div className="card-detail-media-wrapper" layoutId={`card-media-wrapper-${id}`}>
+          {type === 'image' && (
+            <img className="card-detail-media" src={src} alt={alt} />
+          )}
+          {type === 'video' && (
+            <video className="card-detail-media" src={src} autoPlay loop muted playsInline />
+          )}
+        </motion.div>
+        <motion.div className="card-detail-text-content" layoutId={`card-text-content-${id}`}>
+          <motion.h2 className="card-detail-title" layoutId={`card-title-${id}`}>{title}</motion.h2>
+          <motion.p className="card-detail-description" layoutId={`card-description-${id}`}>{description}</motion.p>
+          <div className="card-detail-footer">
+            <motion.span className="card-detail-edition" layoutId={`card-edition-${id}`}>{edition}</motion.span>
+            <motion.span className="card-detail-date" layoutId={`card-date-${id}`}>{date}</motion.span>
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default CardDetail;

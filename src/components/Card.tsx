@@ -1,12 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import './Card.css';
 
 interface CardProps {
+  id: number;
   type: 'image' | 'video';
   src: string;
   alt?: string;
   effects?: ('border' | 'shine' | 'glow' | 'sparkle' | 'interactive-sparkle')[];
+  isAnimating?: boolean;
+  onClick?: () => void;
   title?: string;
   description?: string;
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
@@ -14,11 +17,14 @@ interface CardProps {
   date?: string;
 }
 
-const Card = ({
-  type,
-  src,
-  alt = 'Card media',
+const Card = ({ 
+  id,
+  type, 
+  src, 
+  alt = 'Card media', 
   effects = [],
+  isAnimating = false,
+  onClick,
   title,
   description,
   rarity,
@@ -28,19 +34,26 @@ const Card = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useTransform(y, [-100, 100], [30, -30]);
-  const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+  const rotateX = useTransform(y, [-100, 100], [20, -20]);
+  const rotateY = useTransform(x, [-100, 100], [-20, 20]);
 
   const cardRef = useRef<HTMLDivElement>(null);
 
+  // When the detail view animation starts, reset the rotation.
+  useEffect(() => {
+    if (isAnimating) {
+      x.set(0);
+      y.set(0);
+    }
+  }, [isAnimating, x, y]);
+
   const handlePointerMove = (clientX: number, clientY: number, rect: DOMRect) => {
+    if (isAnimating) return;
     const localX = clientX - rect.left;
     const localY = clientY - rect.top;
-
     const xPct = localX / rect.width - 0.5;
     const yPct = localY / rect.height - 0.5;
-
-    x.set(yPct * -200); // Inverting y for more natural rotation
+    x.set(yPct * -200);
     y.set(xPct * 200);
 
     if (cardRef.current) {
@@ -63,6 +76,7 @@ const Card = ({
   };
 
   const handlePointerLeave = () => {
+    if (isAnimating) return;
     x.set(0);
     y.set(0);
     if (cardRef.current) {
@@ -75,6 +89,8 @@ const Card = ({
     <motion.div
       ref={cardRef}
       className="card-container"
+      layoutId={`card-container-${id}`}
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handlePointerLeave}
       onTouchMove={handleTouchMove}
@@ -86,29 +102,29 @@ const Card = ({
         transformStyle: 'preserve-3d',
       }}
     >
-      {effects.includes('border') && <div className="card-border"></div>}
+      {effects.includes('border') && <div className="card-border" data-rarity={rarity}></div>}
       <div className="card">
         {effects.includes('shine') && <div className="card-shine"></div>}
         {effects.includes('glow') && <div className="card-glow"></div>}
         {effects.includes('sparkle') && <div className="card-sparkle"></div>}
         {effects.includes('interactive-sparkle') && <div className="card-interactive-sparkle"></div>}
-        <div className="card-content" data-rarity={rarity}>
-          <div className="card-media-wrapper">
+        <div className="card-content">
+          <motion.div className="card-media-wrapper" layoutId={`card-media-wrapper-${id}`}>
             {type === 'image' && (
               <img className="card-media" src={src} alt={alt} />
             )}
             {type === 'video' && (
               <video className="card-media" src={src} autoPlay loop muted playsInline />
             )}
-          </div>
-          <div className="card-text-content">
-            {title && <h2 className="card-title">{title}</h2>}
-            {description && <p className="card-description">{description}</p>}
+          </motion.div>
+          <motion.div className="card-text-content" layoutId={`card-text-content-${id}`}>
+            {title && <motion.h2 className="card-title" layoutId={`card-title-${id}`}>{title}</motion.h2>}
+            {description && <motion.p className="card-description" layoutId={`card-description-${id}`}>{description}</motion.p>}
             <div className="card-footer">
-              {edition && <span className="card-edition">{edition}</span>}
-              {date && <span className="card-date">{date}</span>}
+              {edition && <motion.span className="card-edition" layoutId={`card-edition-${id}`}>{edition}</motion.span>}
+              {date && <motion.span className="card-date" layoutId={`card-date-${id}`}>{date}</motion.span>}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
