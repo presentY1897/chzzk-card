@@ -23,7 +23,7 @@
   overflow: hidden;
   position: relative;
   z-index: 2;
-  transform: translateZ(50px); /* Re-add this for 3D effect */
+  transform: translateZ(50px);
 }
 
 .card-content {
@@ -32,7 +32,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* 텍스트를 하단으로 정렬 */
+  justify-content: flex-end;
 }
 
 .card-media-wrapper {
@@ -58,6 +58,9 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, transparent 100%);
   text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 40%;
 }
 
 .card-title {
@@ -71,6 +74,12 @@
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 0 0 10px 0;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-footer {
@@ -78,13 +87,14 @@
   justify-content: space-between;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.8);
+  margin-top: auto;
 }
 
 .card-border {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) translateZ(48px); /* Push border forward */
+  transform: translate(-50%, -50%) translateZ(48px);
   width: calc(100% + 4px);
   height: calc(100% + 4px);
   border-radius: 22px;
@@ -97,7 +107,6 @@
   z-index: 1;
 }
 
-/* ... (이하 효과 스타일은 동일) ... */
 .card-border[data-rarity="rare"] {
   background: radial-gradient(
     circle at var(--x) var(--y),
@@ -206,9 +215,13 @@
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  background-image: inherit;
-  background-size: inherit;
-  background-repeat: inherit;
+  background-image: radial-gradient(circle at 50% 50%, transparent, transparent),
+    radial-gradient(circle at 10% 20%, white, transparent 10%),
+    radial-gradient(circle at 80% 30%, white, transparent 10%),
+    radial-gradient(circle at 30% 80%, lightblue, transparent 10%),
+    radial-gradient(circle at 90% 90%, lightblue, transparent 10%);
+  background-size: 100% 100%, 3px 3px, 3px 3px, 4px 4px, 4px 4px;
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat;
   mix-blend-mode: screen;
   z-index: 5;
   pointer-events: none;
