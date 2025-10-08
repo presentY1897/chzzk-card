@@ -50,6 +50,19 @@
   text-align: center;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.card-media-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .card-media {
@@ -59,6 +72,62 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.card-text-content {
+  padding: 20px;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 30%, transparent);
+  z-index: 10;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.card-title {
+  font-size: 1.4rem;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.card-description {
+  font-size: 0.8rem;
+  margin: 0 0 15px 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* Rarity Border Colors */
+.card-content[data-rarity="rare"] ~ .card-border {
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    hsl(200, 100%, 80%),
+    hsl(280, 100%, 80%),
+    transparent 40%
+  );
+}
+
+.card-content[data-rarity="epic"] ~ .card-border {
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    hsl(270, 100%, 80%),
+    hsl(330, 100%, 80%),
+    transparent 40%
+  );
+}
+
+.card-content[data-rarity="legendary"] ~ .card-border {
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    hsl(50, 100%, 70%),
+    hsl(30, 100%, 70%),
+    transparent 40%
+  );
 }
 
 .card-shine {

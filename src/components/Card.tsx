@@ -7,9 +7,24 @@ interface CardProps {
   src: string;
   alt?: string;
   effects?: ('border' | 'shine' | 'glow' | 'sparkle' | 'interactive-sparkle')[];
+  title?: string;
+  description?: string;
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary';
+  edition?: string;
+  date?: string;
 }
 
-const Card = ({ type, src, alt = 'Card media', effects = [] }: CardProps) => {
+const Card = ({
+  type,
+  src,
+  alt = 'Card media',
+  effects = [],
+  title,
+  description,
+  rarity,
+  edition,
+  date
+}: CardProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -77,13 +92,23 @@ const Card = ({ type, src, alt = 'Card media', effects = [] }: CardProps) => {
         {effects.includes('glow') && <div className="card-glow"></div>}
         {effects.includes('sparkle') && <div className="card-sparkle"></div>}
         {effects.includes('interactive-sparkle') && <div className="card-interactive-sparkle"></div>}
-        <div className="card-content">
-          {type === 'image' && (
-            <img className="card-media" src={src} alt={alt} />
-          )}
-          {type === 'video' && (
-            <video className="card-media" src={src} autoPlay loop muted playsInline />
-          )}
+        <div className="card-content" data-rarity={rarity}>
+          <div className="card-media-wrapper">
+            {type === 'image' && (
+              <img className="card-media" src={src} alt={alt} />
+            )}
+            {type === 'video' && (
+              <video className="card-media" src={src} autoPlay loop muted playsInline />
+            )}
+          </div>
+          <div className="card-text-content">
+            {title && <h2 className="card-title">{title}</h2>}
+            {description && <p className="card-description">{description}</p>}
+            <div className="card-footer">
+              {edition && <span className="card-edition">{edition}</span>}
+              {date && <span className="card-date">{date}</span>}
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
