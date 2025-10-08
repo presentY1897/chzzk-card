@@ -38,6 +38,7 @@ const Card = ({
         rotateY,
         transformStyle: 'preserve-3d',
       }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
       {effects.includes('border') && <div className="card-border" data-rarity={rarity}></div>}
       <div className="card">

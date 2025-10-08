@@ -27,10 +27,7 @@ const CardDetail = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.div
-        className="card-detail-container"
-        layoutId={`card-container-${id}`}
-      >
+      <motion.div className="card-detail-container" layoutId={`card-container-${id}`} transition={{ duration: 0.6, ease: 'easeInOut' }}>
         <motion.div
           className="card-detail-media-wrapper"
           layoutId={`card-media-wrapper-${id}`}

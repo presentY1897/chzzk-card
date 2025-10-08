@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useMotionValue, useTransform } from 'framer-motion';
+import { useMotionValue, useTransform, animate } from 'framer-motion';
 
 type CardEventHandlers = {
   onMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -20,8 +20,8 @@ export const useCardTilt = (isAnimating: boolean) => {
 
   useEffect(() => {
     if (isAnimating) {
-      x.set(0);
-      y.set(0);
+      animate(x, 0, { duration: 0.3, ease: 'easeOut' });
+      animate(y, 0, { duration: 0.3, ease: 'easeOut' });
     }
   }, [isAnimating, x, y]);
 
