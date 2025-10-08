@@ -60,6 +60,7 @@ const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
     >
       <div className="card-border"></div>
       <div className="card">
+        <div className="card-shine"></div>
         <div className="card-content">
           {type === 'image' && (
             <img className="card-media" src={src} alt={alt} />
