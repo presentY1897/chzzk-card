@@ -12,13 +12,13 @@ function App() {
         type="image" 
         src={imageUrl} 
         alt="A sample fantasy landscape" 
-        effects={['border', 'shine', 'glow']}
+        effects={['border', 'interactive-sparkle', 'glow']}
       />
       <Card 
         type="video" 
         src={videoUrl} 
         alt="A sample abstract video" 
-        effects={['border', 'shine', 'glow']}
+        effects={['border', 'sparkle', 'glow']}
       />
     </div>
   );
