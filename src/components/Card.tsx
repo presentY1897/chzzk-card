@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { CardData } from '../types';
 import { useCardTilt } from '../hooks/useCardTilt';
+import CardSurfaceEffects from './CardEffects';
 import './Card.css';
 
 interface CardProps extends CardData {
@@ -40,10 +41,7 @@ const Card = ({
     >
       {effects.includes('border') && <div className="card-border" data-rarity={rarity}></div>}
       <div className="card">
-        {effects.includes('shine') && <div className="card-shine"></div>}
-        {effects.includes('glow') && <div className="card-glow"></div>}
-        {effects.includes('sparkle') && <div className="card-sparkle"></div>}
-        {effects.includes('interactive-sparkle') && <div className="card-interactive-sparkle"></div>}
+        <CardSurfaceEffects effects={effects} />
         <div className="card-content">
           <motion.div className="card-media-wrapper" layoutId={`card-media-wrapper-${id}`}>
             {type === 'image' && (
