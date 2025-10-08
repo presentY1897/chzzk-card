@@ -77,3 +77,32 @@
   z-index: 3;
   pointer-events: none; /* Make sure it doesn't interfere with mouse events */
 }
+
+.card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(
+    115deg,
+    transparent 48%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 52%
+  );
+  background-size: 200% 100%;
+  mix-blend-mode: overlay;
+  z-index: 4;
+  pointer-events: none;
+  animation: glow-animation 4s infinite linear;
+}
+
+@keyframes glow-animation {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
+}

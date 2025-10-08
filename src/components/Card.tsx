@@ -6,9 +6,10 @@ interface CardProps {
   type: 'image' | 'video';
   src: string;
   alt?: string;
+  effects?: ('border' | 'shine' | 'glow')[];
 }
 
-const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
+const Card = ({ type, src, alt = 'Card media', effects = [] }: CardProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -58,9 +59,10 @@ const Card = ({ type, src, alt = 'Card media' }: CardProps) => {
         transformStyle: 'preserve-3d',
       }}
     >
-      <div className="card-border"></div>
+      {effects.includes('border') && <div className="card-border"></div>}
       <div className="card">
-        <div className="card-shine"></div>
+        {effects.includes('shine') && <div className="card-shine"></div>}
+        {effects.includes('glow') && <div className="card-glow"></div>}
         <div className="card-content">
           {type === 'image' && (
             <img className="card-media" src={src} alt={alt} />
