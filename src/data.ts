@@ -25,4 +25,16 @@ export const cardData: CardData[] = [
     edition: 'Core Set',
     date: '2025-Q2',
   },
+  {
+    id: 3,
+    type: 'embed',
+    src: 'https://chzzk.naver.com/embed/clip/kpeDI5usC7',
+    alt: 'Chzzk Video Clip',
+    effects: ['border', 'glow'],
+    title: 'Epic Moment',
+    description: 'An amazing play from a Chzzk streamer.',
+    rarity: 'epic',
+    edition: 'Live Clips',
+    date: '2025-Q3',
+  },
 ];

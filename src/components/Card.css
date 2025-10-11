@@ -42,12 +42,23 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden; /* Clip the iframe edges */
 }
 
 .card-media {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.card-embed {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;   /* Enlarge to crop letterboxing */
+  height: 150%;  /* Enlarge to crop letterboxing */
+  transform: translate(-50%, -50%);
+  border: none;
 }
 
 .card-text-content {
