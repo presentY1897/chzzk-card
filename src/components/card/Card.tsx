@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import type { CardData } from "../types";
-import { useCardTilt } from "../hooks/useCardTilt";
-import CardSurfaceEffects from "./CardEffects";
+import type { CardData } from "../../types";
+import { useCardTilt } from "../../hooks/useCardTilt";
+import CardSurfaceEffects from "../CardEffects";
 import "./Card.css";
 import CardInnerContent from "./CardInnerContent";
 import CardDescription from "./CardDescription";
