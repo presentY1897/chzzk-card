@@ -4,6 +4,7 @@ import { useCardTilt } from "../hooks/useCardTilt";
 import CardSurfaceEffects from "./CardEffects";
 import "./Card.css";
 import CardInnerContent from "./CardInnerContent";
+import CardDescription from "./CardDescription";
 
 interface CardProps extends CardData {
   isAnimating?: boolean;
@@ -53,39 +54,15 @@ const Card = ({
             title={title}
             alt={alt}
           />{" "}
-          <motion.div
-            className="card-text-content"
-            layoutId={`card-text-content-${id}`}
-          >
-            {title && (
-              <motion.h2 className="card-title" layoutId={`card-title-${id}`}>
-                {title}
-              </motion.h2>
-            )}
-            {description && (
-              <motion.p
-                className="card-description"
-                layoutId={`card-description-${id}`}
-              >
-                {description}
-              </motion.p>
-            )}
-            <div className="card-footer">
-              {edition && (
-                <motion.span
-                  className="card-edition"
-                  layoutId={`card-edition-${id}`}
-                >
-                  {edition}
-                </motion.span>
-              )}
-              {date && (
-                <motion.span className="card-date" layoutId={`card-date-${id}`}>
-                  {date}
-                </motion.span>
-              )}
-            </div>
-          </motion.div>
+          <CardDescription
+            id={id}
+            title={title}
+            description={description}
+            edition={edition}
+            date={date}
+            type={type}
+            src={src}
+          />
         </div>
       </div>
     </motion.div>
