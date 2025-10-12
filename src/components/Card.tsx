@@ -1,9 +1,9 @@
-import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { CardData } from "../types";
 import { useCardTilt } from "../hooks/useCardTilt";
 import CardSurfaceEffects from "./CardEffects";
 import "./Card.css";
+import CardInnerContent from "./CardInnerContent";
 
 interface CardProps extends CardData {
   isAnimating?: boolean;
@@ -46,36 +46,13 @@ const Card = ({
       <div className="card">
         <CardSurfaceEffects effects={effects} />
         <div className="card-content">
-          <motion.div
-            className="card-media-wrapper"
-            layoutId={`card-media-wrapper-${id}`}
-          >
-            {type === "image" && (
-              <img className="card-media" src={src} alt={alt} />
-            )}
-            {type === "video" && (
-              <video
-                className="card-media"
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-            )}
-            {type === "embed" && (
-              <iframe
-                className="card-media card-embed"
-                src={src}
-                title={title || "Embedded Content"}
-                width="240"
-                height="360"
-                frameBorder="0"
-                // allow="autoplay; clipboard-write; web-share"
-                allowFullScreen
-              ></iframe>
-            )}
-          </motion.div>{" "}
+          <CardInnerContent
+            id={id}
+            type={type}
+            src={src}
+            title={title}
+            alt={alt}
+          />{" "}
           <motion.div
             className="card-text-content"
             layoutId={`card-text-content-${id}`}
