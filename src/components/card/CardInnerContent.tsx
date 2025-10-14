@@ -29,8 +29,6 @@ const CardInnerContent = ({
           className="card-media card-embed"
           src={src}
           title={title || "Embedded Content"}
-          width="240"
-          height="360"
           frameBorder="0"
           // allow="autoplay; clipboard-write; web-share"
           allowFullScreen
