@@ -31,21 +31,21 @@ export default function Cube({
   return (
     <div
       className="container"
+      ref={ref}
       style={{
         width: `${halfWidth * 2}px`,
         height: `${halfHeight * 2}px`,
       }}
+      {...eventHandlers}
     >
       <motion.div
         className="cube"
-        ref={ref}
         style={{
           width: `${halfWidth * 2}px`,
           height: `${halfHeight * 2}px`,
           rotateX,
           rotateY,
         }}
-        {...eventHandlers}
       >
         <motion.div
           className="side front"

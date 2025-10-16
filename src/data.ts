@@ -30,7 +30,7 @@ export const cardData: CardData[] = [
     type: 'embed',
     src: 'https://chzzk.naver.com/embed/clip/kpeDI5usC7',
     alt: 'Chzzk Video Clip',
-    effects: ['border', 'glow'],
+    effects: ['border', 'sparkle', 'glow'],
     title: 'Epic Moment',
     description: 'An amazing play from a Chzzk streamer.',
     rarity: 'epic',
