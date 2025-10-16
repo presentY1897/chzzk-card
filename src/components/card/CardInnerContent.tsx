@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import type { CardData } from "../types";
+import type { CardData } from "../../types";
 
 const CardInnerContent = ({
   id,
