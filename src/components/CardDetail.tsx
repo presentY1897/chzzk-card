@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import type { CardData } from "../types";
 import "./CardDetail.css";
@@ -27,25 +26,11 @@ const CardDetail = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.div className="card-detail-container" layoutId={`card-container-${id}`} transition={{ duration: 0.6, ease: 'easeInOut' }}>
-<motion.div className="card-detail-media-wrapper" layoutId={`card-media-wrapper-${id}`}>
-          {type === 'image' && (
-            <img className="card-detail-media" src={src} alt={alt} />
-          )}
-          {type === 'video' && (
-            <video className="card-detail-media" src={src} autoPlay loop muted playsInline />
-          )}
-          {type === 'embed' && (
-            <iframe
-              className="card-detail-media"
-              src={`${src}?autoplay=true`} // Start playing when opened
-              title={title || 'Embedded Content'}
-              frameBorder="0"
-              allow="autoplay; clipboard-write; web-share"
-              allowFullScreen
-            ></iframe>
-          )}
-        </motion.div>
+      <motion.div
+        className="card-detail-container"
+        layoutId={`card-container-${id}`}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <motion.div
           className="card-detail-text-content"
           layoutId={`card-text-content-${id}`}
@@ -56,6 +41,34 @@ const CardDetail = ({
           >
             {title}
           </motion.h2>
+          <motion.div
+            className="card-detail-media-wrapper"
+            layoutId={`card-media-wrapper-${id}`}
+          >
+            {type === "image" && (
+              <img className="card-detail-media" src={src} alt={alt} />
+            )}
+            {type === "video" && (
+              <video
+                className="card-detail-media"
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            )}
+            {type === "embed" && (
+              <iframe
+                className="card-detail-media"
+                src={`${src}?autoplay=true`} // Start playing when opened
+                title={title || "Embedded Content"}
+                frameBorder="0"
+                allow="autoplay; clipboard-write; web-share"
+                allowFullScreen
+              ></iframe>
+            )}
+          </motion.div>
           <motion.p
             className="card-detail-description"
             layoutId={`card-description-${id}`}

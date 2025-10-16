@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import Card from './components/Card';
-import CardDetail from './components/CardDetail';
-import { cardData } from './data';
-import './App.css';
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import Card from "./components/card/Card";
+import CardDetail from "./components/CardDetail";
+import { cardData } from "./data";
+import "./App.css";
 
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const selectedItem = selectedId !== null ? cardData.find(item => item.id === selectedId) : null;
+  const selectedItem =
+    selectedId !== null
+      ? cardData.find((item) => item.id === selectedId)
+      : null;
 
   return (
     <div className="App">
@@ -25,10 +28,7 @@ function App() {
 
       <AnimatePresence>
         {selectedItem && (
-          <CardDetail 
-            onClick={() => setSelectedId(null)}
-            {...selectedItem} 
-          />
+          <CardDetail onClick={() => setSelectedId(null)} {...selectedItem} />
         )}
       </AnimatePresence>
     </div>
