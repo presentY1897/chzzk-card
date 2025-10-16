@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { type ReactNode } from "react";
 import "./Cube.css";
+import { useCubeRotation } from "../hooks/useCubeRotate";
 
 export interface CubeData {
   frontContent?: ReactNode;
@@ -25,17 +26,26 @@ export default function Cube({
   halfHeight,
   halfLength = 0,
 }: CubeData) {
+  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation();
+
   return (
     <div
       className="container"
-      style={{ width: `${halfWidth * 2}px`, height: `${halfHeight * 2}px` }}
+      style={{
+        width: `${halfWidth * 2}px`,
+        height: `${halfHeight * 2}px`,
+      }}
     >
       <motion.div
         className="cube"
+        ref={ref}
         style={{
           width: `${halfWidth * 2}px`,
           height: `${halfHeight * 2}px`,
+          rotateX,
+          rotateY,
         }}
+        {...eventHandlers}
       >
         <motion.div
           className="side front"
