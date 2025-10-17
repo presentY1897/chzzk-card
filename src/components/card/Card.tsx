@@ -29,7 +29,6 @@ const Card = ({
         <motion.div
           className="card-container"
           layoutId={`card-container-${id}`}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {effects.includes("border") && (
             <div className="card-border" data-rarity={rarity}></div>
