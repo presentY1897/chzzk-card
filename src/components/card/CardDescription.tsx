@@ -18,26 +18,31 @@ const CardDescription = ({
           {title}
         </motion.h2>
       )}
-      {description && (
-        <motion.p
-          className="card-description"
-          layoutId={`card-description-${id}`}
-        >
-          {description}
-        </motion.p>
-      )}
-      <div className="card-footer">
-        {edition && (
-          <motion.span className="card-edition" layoutId={`card-edition-${id}`}>
-            {edition}
-          </motion.span>
+      <footer className="card-footer">
+        {description && (
+          <motion.p
+            className="card-description"
+            layoutId={`card-description-${id}`}
+          >
+            {description}
+          </motion.p>
         )}
-        {date && (
-          <motion.span className="card-date" layoutId={`card-date-${id}`}>
-            {date}
-          </motion.span>
-        )}
-      </div>
+        <div className="card-footer-info">
+          {edition && (
+            <motion.span
+              className="card-edition"
+              layoutId={`card-edition-${id}`}
+            >
+              {edition}
+            </motion.span>
+          )}
+          {date && (
+            <motion.span className="card-date" layoutId={`card-date-${id}`}>
+              {date}
+            </motion.span>
+          )}
+        </div>
+      </footer>
     </motion.div>
   );
 };
