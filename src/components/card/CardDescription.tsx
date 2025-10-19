@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import type { CardData } from "../../types";
 
-const CardDescription = ({
-  id,
-  title,
-  description,
-  edition,
-  date,
-}: CardData) => {
+interface CardDescriptionProps {
+  card: CardData;
+}
+
+const CardDescription = ({ card }: CardDescriptionProps) => {
+  const { id, title, description, edition, date } = card;
   return (
     <motion.div
       className="card-text-content"

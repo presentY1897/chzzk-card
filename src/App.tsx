@@ -19,9 +19,8 @@ function App() {
         {cardData.map((item) => (
           <Card
             key={item.id}
+            card={item}
             onClick={() => setSelectedId(item.id)}
-            isAnimating={selectedId !== null}
-            {...item}
           />
         ))}
       </div>

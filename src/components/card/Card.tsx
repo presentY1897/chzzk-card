@@ -6,25 +6,16 @@ import CardInnerContent from "./CardInnerContent";
 import CardDescription from "./CardDescription";
 import Cube from "../Cube";
 
-interface CardProps extends CardData {
-  isAnimating?: boolean;
+interface CardProps {
+  card: CardData;
   onClick?: () => void;
 }
 
-const Card = ({
-  id,
-  type,
-  src,
-  alt = "Card media",
-  effects = [],
-  title,
-  description,
-  rarity,
-  edition,
-  date,
-}: CardProps) => {
+const Card = ({ card, onClick }: CardProps) => {
+  const { id, effects = [], rarity } = card;
   return (
     <Cube
+      onClick={onClick}
       frontContent={
         <motion.div
           className="card-container"
@@ -36,22 +27,8 @@ const Card = ({
           <div className="card">
             <CardSurfaceEffects effects={effects} />
             <div className="card-content">
-              <CardInnerContent
-                id={id}
-                type={type}
-                src={src}
-                title={title}
-                alt={alt}
-              />{" "}
-              <CardDescription
-                id={id}
-                title={title}
-                description={description}
-                edition={edition}
-                date={date}
-                type={type}
-                src={src}
-              />
+              <CardInnerContent card={card} />
+              <CardDescription card={card} />
             </div>
           </div>
         </motion.div>
