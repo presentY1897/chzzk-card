@@ -1,0 +1,15 @@
+.container {
+  perspective: 800px;
+}
+
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.side {
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+}

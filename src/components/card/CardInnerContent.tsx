@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import type { CardData } from "../types";
+import type { CardData } from "../../types";
 
-const CardInnerContent = ({
-  id,
-  type,
-  src,
-  title,
-  alt = "Card media",
-}: CardData) => {
+interface CardInnerContentProps {
+  card: CardData;
+}
+
+const CardInnerContent = ({ card }: CardInnerContentProps) => {
+  const { id, type, src, title, alt = "Card media" } = card;
   return (
     <motion.div
       className="card-media-wrapper"

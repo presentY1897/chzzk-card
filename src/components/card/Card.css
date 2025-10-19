@@ -1,14 +1,11 @@
 .card-container {
-  width: 240px;
-  height: 360px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  perspective: 800px;
   position: relative;
-  --x: 50%;
-  --y: 50%;
   cursor: pointer;
 }
 
@@ -55,8 +52,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 360%;   /* Enlarge to crop letterboxing */
-  height: 100%;  /* Enlarge to crop letterboxing */
+  width: 360%; /* Enlarge to crop letterboxing */
+  height: 100%; /* Enlarge to crop letterboxing */
   transform: translate(-50%, -50%);
   border: none;
 }
@@ -64,14 +61,15 @@
 .card-text-content {
   position: relative;
   z-index: 2;
+  height: 100%;
   width: 100%;
   padding: 15px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, transparent 100%);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   text-align: left;
   display: flex;
   flex-direction: column;
-  height: 40%;
+  box-sizing: border-box;
 }
 
 .card-title {
@@ -95,10 +93,16 @@
 
 .card-footer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.8);
   margin-top: auto;
+}
+
+.card-footer-info {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-border {
@@ -144,4 +148,3 @@
     transparent 40%
   );
 }
-
