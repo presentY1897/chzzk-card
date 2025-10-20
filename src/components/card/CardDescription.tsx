@@ -7,7 +7,8 @@ interface CardDescriptionProps {
 }
 
 const CardDescription = ({ card }: CardDescriptionProps) => {
-  const { id, title, description, edition, date, type, clipId } = card;
+  const { id, title, description, edition, date, type, clipId, ownerChannel } =
+    card;
   const [clip, setClip] = useState<ChzzkClip | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -62,6 +63,13 @@ const CardDescription = ({ card }: CardDescriptionProps) => {
           </motion.p>
         )}
         <div className="card-footer-info">
+          {ownerChannel?.channelImageUrl && (
+            <img
+              className="card-channel-image"
+              src={ownerChannel.channelImageUrl}
+              alt="Channel Image"
+            />
+          )}
           {edition && (
             <motion.span
               className="card-edition"

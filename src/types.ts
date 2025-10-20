@@ -20,6 +20,9 @@ export interface CardData {
   edition?: string;
   date?: string;
   thumbnailImageUrl?: string;
+  ownerChannel?: {
+    channelImageUrl?: string;
+  }
 }
 
 export interface ChzzkClip {

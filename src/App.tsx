@@ -30,6 +30,7 @@ function App() {
           rarity: "common",
           effects: ["border", "sparkle", "glow"],
           thumbnailImageUrl: item.thumbnailImageUrl,
+          ownerChannel: item.ownerChannel,
         }));
         setCardData(clips);
       } catch (error) {
