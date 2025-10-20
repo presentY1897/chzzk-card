@@ -1,21 +1,19 @@
 import { motion } from "framer-motion";
-import type { CardData } from "../../types";
-import CardSurfaceEffects from "../CardEffects";
-import "./Card.css";
+import type { CardData } from "@/types";
+import Cube from "@/components/Cube";
+import CardSurfaceEffects from "@/components/CardEffects";
 import CardInnerContent from "./CardInnerContent";
 import CardDescription from "./CardDescription";
-import Cube from "../Cube";
+import "./Card.css";
 
 interface CardProps {
   card: CardData;
-  onClick?: () => void;
 }
 
-const Card = ({ card, onClick }: CardProps) => {
+const Card = ({ card }: CardProps) => {
   const { id, effects = [], rarity } = card;
   return (
     <Cube
-      onClick={onClick}
       frontContent={
         <motion.div
           className="card-container"
