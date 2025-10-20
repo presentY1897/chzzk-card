@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import type { CardData } from "../types";
+import { useEffect, useState } from "react";
+import type { CardData, ChzzkClip } from "../types";
 import "./CardDetail.css";
 
 interface CardDetailProps extends CardData {
@@ -10,6 +11,7 @@ const CardDetail = ({
   id,
   type,
   src,
+  clipId,
   alt,
   title,
   description,
@@ -17,6 +19,39 @@ const CardDetail = ({
   date,
   onClick,
 }: CardDetailProps) => {
+  const [clip, setClip] = useState<ChzzkClip | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (type === "embed" && clipId) {
+      const fetchClip = async () => {
+        try {
+          setLoading(true);
+          const response = await fetch(
+            `/api/service/v1/play-info/clip/${clipId}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          setClip(data.content);
+        } catch (error) {
+          setError(error as Error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchClip();
+    }
+  }, [type, clipId]);
+
+  const displayTitle = clip?.contentTitle || title;
+  const displayDescription = clip?.ownerChannel?.channelName
+    ? `by ${clip.ownerChannel.channelName}`
+    : description;
+
   return (
     <motion.div
       className="backdrop"
@@ -38,7 +73,7 @@ const CardDetail = ({
             className="card-detail-title"
             layoutId={`card-title-${id}`}
           >
-            {title}
+            {displayTitle}
           </motion.h2>
           <motion.div
             className="card-detail-media-wrapper"
@@ -60,8 +95,8 @@ const CardDetail = ({
             {type === "embed" && (
               <iframe
                 className="card-detail-media"
-                src={`${src}?autoplay=true`} // Start playing when opened
-                title={title || "Embedded Content"}
+                src={`https://chzzk.naver.com/embed/clip/${clipId}?autoplay=true`}
+                title={displayTitle || "Embedded Content"}
                 frameBorder="0"
                 allow="autoplay; clipboard-write; web-share"
                 allowFullScreen
@@ -72,7 +107,7 @@ const CardDetail = ({
             className="card-detail-description"
             layoutId={`card-description-${id}`}
           >
-            {description}
+            {displayDescription}
           </motion.p>
           <div className="card-detail-footer">
             <motion.span

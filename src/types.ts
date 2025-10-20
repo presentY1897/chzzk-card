@@ -1,11 +1,17 @@
-export type CardEffect = 'border' | 'shine' | 'glow' | 'sparkle' | 'interactive-sparkle';
-export type CardRarity = 'common' | 'rare' | 'epic' | 'legendary';
-export type CardType = 'image' | 'video' | 'embed';
+export type CardEffect =
+  | "border"
+  | "shine"
+  | "glow"
+  | "sparkle"
+  | "interactive-sparkle";
+export type CardRarity = "common" | "rare" | "epic" | "legendary";
+export type CardType = "image" | "video" | "embed";
 
 export interface CardData {
   id: number;
   type: CardType;
-  src: string;
+  src?: string;
+  clipId?: string;
   alt?: string;
   effects?: CardEffect[];
   title?: string;
@@ -13,4 +19,11 @@ export interface CardData {
   rarity?: CardRarity;
   edition?: string;
   date?: string;
+}
+
+export interface ChzzkClip {
+  contentTitle: string;
+  ownerChannel: {
+    channelName: string;
+  };
 }

@@ -26,7 +26,7 @@
   {
     "id": 3,
     "type": "embed",
-    "src": "https://chzzk.naver.com/embed/clip/kpeDI5usC7",
+    "clipId": "kpeDI5usC7",
     "alt": "Chzzk Video Clip",
     "effects": ["border", "sparkle", "glow"],
     "title": "Epic Moment",
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "type": "embed",
-    "src": "https://chzzk.naver.com/embed/clip/sl49pczK7n",
+    "clipId": "sl49pczK7n",
     "alt": "Chzzk Video Clip(Portrait)",
     "effects": ["border", "glow"],
     "title": "Epic Moment",
