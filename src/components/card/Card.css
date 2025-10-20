@@ -53,7 +53,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 360%; /* Enlarge to crop letterboxing */
+  width: 100%; /* Enlarge to crop letterboxing */
   height: 100%; /* Enlarge to crop letterboxing */
   transform: translate(-50%, -50%);
   border: none;
