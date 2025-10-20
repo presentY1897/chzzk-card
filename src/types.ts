@@ -16,7 +16,7 @@ export interface CardData {
   effects?: CardEffect[];
   title?: string;
   description?: string;
-  rarity?: CardRarity;
+  rarity?: CardRarity; // rarity 보다는 고유 컬러가 나을듯
   edition?: string;
   date?: string;
   thumbnailImageUrl?: string;
