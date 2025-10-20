@@ -13,7 +13,6 @@ const CardDetail = ({
   alt,
   title,
   description,
-  rarity,
   edition,
   date,
   onClick,

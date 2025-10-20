@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Card from "./card/Card";
-import type { CardData } from "../types";
+import type { CardData } from "@/types";
 import "./CardPack.css";
 
 interface CardPackProps {
