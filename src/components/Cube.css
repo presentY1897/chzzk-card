@@ -10,6 +10,8 @@
 .side {
   position: absolute;
   backface-visibility: hidden;
+  -webkit-perspective: 0;
+  -webkit-backface-visibility: hidden !important;
   width: 100%;
   height: 100%;
 }
