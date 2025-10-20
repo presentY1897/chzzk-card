@@ -7,7 +7,15 @@ interface CardInnerContentProps {
 }
 
 const CardInnerContent = ({ card }: CardInnerContentProps) => {
-  const { id, type, src, title, alt = "Card media", clipId } = card;
+  const {
+    id,
+    type,
+    src,
+    title,
+    alt = "Card media",
+    clipId,
+    thumbnailImageUrl,
+  } = card;
   const [clip, setClip] = useState<ChzzkClip | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -53,13 +61,14 @@ const CardInnerContent = ({ card }: CardInnerContentProps) => {
         />
       )}
       {type === "embed" && (
-        <iframe
-          className="card-media card-embed"
-          src={`https://chzzk.naver.com/embed/clip/${clipId}`}
-          title={clip?.contentTitle || title || "Embedded Content"}
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
+        <img className="card-media" src={thumbnailImageUrl} alt={alt} />
+        // <iframe
+        //   className="card-media card-embed"
+        //   src={`https://chzzk.naver.com/embed/clip/${clipId}`}
+        //   title={clip?.contentTitle || title || "Embedded Content"}
+        //   frameBorder="0"
+        //   allowFullScreen
+        // ></iframe>
       )}
     </motion.div>
   );

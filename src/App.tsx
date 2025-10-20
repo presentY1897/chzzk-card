@@ -28,6 +28,8 @@ function App() {
           clipId: item.clipUID,
           title: item.clipTitle,
           rarity: "common",
+          effects: ["border", "sparkle", "glow"],
+          thumbnailImageUrl: item.thumbnailImageUrl,
         }));
         setCardData(clips);
       } catch (error) {
@@ -57,7 +59,7 @@ function App() {
     <div className="App">
       <div className="card-grid">
         {cardData.map((item) => (
-          <div key={item.id} onClick={() => setSelectedId(item.id)}>
+          <div key={item.id} onDoubleClick={() => setSelectedId(item.id)}>
             <Card card={item} />
           </div>
         ))}

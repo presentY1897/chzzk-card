@@ -19,6 +19,7 @@ export interface CardData {
   rarity?: CardRarity;
   edition?: string;
   date?: string;
+  thumbnailImageUrl?: string;
 }
 
 export interface ChzzkClip {
