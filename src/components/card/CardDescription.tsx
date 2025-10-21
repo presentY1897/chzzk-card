@@ -3,13 +3,13 @@ import type { CardData, ChzzkClipInfo } from "@/types";
 
 interface CardDescriptionProps {
   card: CardData;
-  clipInfo: ChzzkClipInfo | null;
 }
 
-const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
+const CardDescription = ({ card }: CardDescriptionProps) => {
   const { id, title, description, edition, date } = card;
-  const displayTitle = clipInfo?.contentTitle || title;
-  const displayCardStreamer = clipInfo?.ownerChannel?.channelName || edition;
+  const displayTitle = title;
+  const displayCardStreamer = edition?.name;
+  const channelImageUrl = edition?.imageUrl;
 
   return (
     <motion.div
@@ -31,17 +31,26 @@ const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
           </motion.p>
         )}
         <div className="card-footer-info">
-          {displayCardStreamer && (
-            <motion.span
-              className="card-edition"
-              layoutId={`card-edition-${id}`}
-            >
-              {displayCardStreamer}
-            </motion.span>
-          )}
+          <div className="card-edition">
+            {channelImageUrl && (
+              <img
+                className="card-channel-image"
+                src={channelImageUrl}
+                alt="Channel Owner Image"
+              />
+            )}
+            {displayCardStreamer && (
+              <motion.span
+                className="card-edition"
+                layoutId={`card-edition-${id}`}
+              >
+                {displayCardStreamer}
+              </motion.span>
+            )}
+          </div>
           {date && (
             <motion.span className="card-date" layoutId={`card-date-${id}`}>
-              {date}
+              {new Date(date).toLocaleDateString()}
             </motion.span>
           )}
         </div>
