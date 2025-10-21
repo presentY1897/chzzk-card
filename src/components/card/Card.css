@@ -52,7 +52,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 360%; /* Enlarge to crop letterboxing */
+  width: 100%; /* Enlarge to crop letterboxing */
   height: 100%; /* Enlarge to crop letterboxing */
   transform: translate(-50%, -50%);
   border: none;
@@ -103,6 +103,19 @@
 .card-footer-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.card-edition {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-channel-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 .card-border {

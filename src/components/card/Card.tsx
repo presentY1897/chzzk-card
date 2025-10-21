@@ -3,7 +3,6 @@ import type { CardData } from "@/types";
 import Cube from "@/components/Cube";
 import CardSurfaceEffects from "@/components/CardEffects";
 import CardInnerContent from "./CardInnerContent";
-import { useFetchChzzkClipInfo } from "@/hooks/useChzzkFetch";
 import CardDescription from "./CardDescription";
 import "./Card.css";
 
@@ -13,8 +12,7 @@ interface CardProps {
 }
 
 const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
-  const { id, effects = [], rarity, clipId } = card;
-  const clipInfo = useFetchChzzkClipInfo(clipId);
+  const { id, effects = [], rarity } = card;
 
   return (
     <Cube
@@ -30,7 +28,7 @@ const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
             <CardSurfaceEffects effects={effects} />
             <div className="card-content">
               <CardInnerContent card={card} />
-              <CardDescription card={card} clipInfo={clipInfo} />
+              <CardDescription card={card} />
             </div>
           </div>
         </motion.div>
