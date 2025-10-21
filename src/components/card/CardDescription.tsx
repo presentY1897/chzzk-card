@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import type { CardData } from "@/types";
+import type { CardData, ChzzkClipInfo } from "@/types";
 
 interface CardDescriptionProps {
   card: CardData;
+  clipInfo: ChzzkClipInfo | null;
 }
 
-const CardDescription = ({ card }: CardDescriptionProps) => {
+const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
   const { id, title, description, edition, date } = card;
   return (
     <motion.div
@@ -14,7 +15,7 @@ const CardDescription = ({ card }: CardDescriptionProps) => {
     >
       {title && (
         <motion.h2 className="card-title" layoutId={`card-title-${id}`}>
-          {title}
+          {clipInfo?.contentTitle || title}
         </motion.h2>
       )}
       <footer className="card-footer">
