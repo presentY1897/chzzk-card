@@ -9,12 +9,24 @@ import { convertChzzkPreviewClipInfoToCardData } from "./tools/dataTool";
 
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const cardList = useFetchChzzkClipRecommendedList();
+  const { data: cardList, loading, error } = useFetchChzzkClipRecommendedList();
 
-  const selectedItem =
+  const selectedCard =
     selectedId !== null
-      ? cardData.find((item) => item.id === selectedId)
+      ? convertChzzkPreviewClipInfoToCardData(cardList[selectedId], selectedId)
       : null;
+
+  if (loading) {
+    return <div className="loading-message">Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="error-message">
+        예상치 못한 에러가 발생했습니다. Error: {error.message}
+      </div>
+    );
+  }
 
   return (
     <div className="App">
@@ -30,8 +42,8 @@ function App() {
       </div>
 
       <AnimatePresence>
-        {selectedItem && (
-          <CardDetail onClick={() => setSelectedId(null)} {...selectedItem} />
+        {selectedCard && (
+          <CardDetail onClick={() => setSelectedId(null)} {...selectedCard} />
         )}
       </AnimatePresence>
     </div>
