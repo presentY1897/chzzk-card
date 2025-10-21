@@ -25,7 +25,7 @@ export default function Cube({
   halfWidth,
   halfHeight,
   halfLength = 0,
-}: CubeProps) {
+}: CubeData) {
   const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation();
 
   return (

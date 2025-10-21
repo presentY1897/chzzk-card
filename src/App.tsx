@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Card from "./components/card/Card";
 import CardDetail from "./components/CardDetail";
-import { cardData } from "./data";
+import cardData from "./data.json";
 import "./App.css";
 
 function App() {

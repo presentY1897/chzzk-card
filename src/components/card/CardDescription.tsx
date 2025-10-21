@@ -1,20 +1,24 @@
 import { motion } from "framer-motion";
-import type { CardData } from "@/types";
+import type { CardData, ChzzkClipInfo } from "@/types";
 
 interface CardDescriptionProps {
   card: CardData;
+  clipInfo: ChzzkClipInfo | null;
 }
 
-const CardDescription = ({ card }: CardDescriptionProps) => {
+const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
   const { id, title, description, edition, date } = card;
+  const displayTitle = clipInfo?.contentTitle || title;
+  const displayCardStreamer = clipInfo?.ownerChannel?.channelName || edition;
+
   return (
     <motion.div
       className="card-text-content"
       layoutId={`card-text-content-${id}`}
     >
-      {title && (
+      {displayTitle && (
         <motion.h2 className="card-title" layoutId={`card-title-${id}`}>
-          {title}
+          {displayTitle}
         </motion.h2>
       )}
       <footer className="card-footer">
@@ -27,12 +31,12 @@ const CardDescription = ({ card }: CardDescriptionProps) => {
           </motion.p>
         )}
         <div className="card-footer-info">
-          {edition && (
+          {displayCardStreamer && (
             <motion.span
               className="card-edition"
               layoutId={`card-edition-${id}`}
             >
-              {edition}
+              {displayCardStreamer}
             </motion.span>
           )}
           {date && (
