@@ -5,13 +5,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
   gap: 40px;
 }
 
 .card-grid {
   display: flex;
   gap: 40px;
+  padding: 40px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -28,4 +28,3 @@
   justify-content: center;
   z-index: 100;
 }
-
