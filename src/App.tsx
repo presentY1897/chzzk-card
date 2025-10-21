@@ -4,9 +4,12 @@ import Card from "./components/card/Card";
 import CardDetail from "./components/CardDetail";
 import cardData from "./data.json";
 import "./App.css";
+import { useFetchChzzkClipRecommendedList } from "./hooks/useChzzkFetch";
+import type { ChzzkClipPreviewInfo } from "./types";
 
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const cardList = useFetchChzzkClipRecommendedList();
 
   const selectedItem =
     selectedId !== null
@@ -16,12 +19,24 @@ function App() {
   return (
     <div className="App">
       <div className="card-grid">
-        {cardData.map((item) => (
+        {cardList?.map((item: ChzzkClipPreviewInfo, index: number) => (
           <Card
-            key={item.id}
-            card={item}
+            key={index}
+            card={{
+              id: index,
+              type: "image",
+              effects: ["border"],
+              src: item.thumbnailImageUrl,
+              clipId: item.clipUID,
+              title: item.clipTitle,
+              edition: {
+                name: item.ownerChannel?.channelName,
+                imageUrl: item.ownerChannel?.channelImageUrl,
+              },
+              date: item.createdDate,
+            }}
             initialCardFaceState="back"
-            onClick={() => setSelectedId(item.id)}
+            onClick={() => setSelectedId(index)}
           />
         ))}
       </div>
