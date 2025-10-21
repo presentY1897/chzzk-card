@@ -8,14 +8,17 @@ interface CardDescriptionProps {
 
 const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
   const { id, title, description, edition, date } = card;
+  const displayTitle = clipInfo?.contentTitle || title;
+  const displayCardStreamer = clipInfo?.ownerChannel?.channelName || edition;
+
   return (
     <motion.div
       className="card-text-content"
       layoutId={`card-text-content-${id}`}
     >
-      {title && (
+      {displayTitle && (
         <motion.h2 className="card-title" layoutId={`card-title-${id}`}>
-          {clipInfo?.contentTitle || title}
+          {displayTitle}
         </motion.h2>
       )}
       <footer className="card-footer">
@@ -28,12 +31,12 @@ const CardDescription = ({ card, clipInfo }: CardDescriptionProps) => {
           </motion.p>
         )}
         <div className="card-footer-info">
-          {edition && (
+          {displayCardStreamer && (
             <motion.span
               className="card-edition"
               layoutId={`card-edition-${id}`}
             >
-              {edition}
+              {displayCardStreamer}
             </motion.span>
           )}
           {date && (
