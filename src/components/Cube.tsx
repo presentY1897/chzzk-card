@@ -13,6 +13,7 @@ export interface CubeData {
   halfWidth: number;
   halfHeight: number;
   halfLength: number;
+  initialFace?: "front" | "back";
 }
 
 export default function Cube({
@@ -25,8 +26,9 @@ export default function Cube({
   halfWidth,
   halfHeight,
   halfLength = 0,
+  initialFace = "front",
 }: CubeData) {
-  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation();
+  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation(initialFace);
 
   return (
     <div

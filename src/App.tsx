@@ -20,6 +20,7 @@ function App() {
           <Card
             key={item.id}
             card={item}
+            initialCardFaceState="back"
             onClick={() => setSelectedId(item.id)}
           />
         ))}

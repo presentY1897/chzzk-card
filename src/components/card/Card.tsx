@@ -9,9 +9,10 @@ import "./Card.css";
 
 interface CardProps {
   card: CardData;
+  initialCardFaceState: "front" | "back";
 }
 
-const Card = ({ card }: CardProps) => {
+const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
   const { id, effects = [], rarity, clipId } = card;
   const clipInfo = useFetchChzzkClipInfo(clipId);
 
@@ -48,6 +49,7 @@ const Card = ({ card }: CardProps) => {
       halfWidth={120}
       halfHeight={180}
       halfLength={0}
+      initialFace={initialCardFaceState}
     />
   );
 };
