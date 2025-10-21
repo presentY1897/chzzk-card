@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import type { CardData } from "@/types";
 import Cube from "@/components/Cube";
-import CardSurfaceEffects from "@/components/CardEffects";
+import CardSurfaceEffects from "@/components/card/CardEffects";
 import CardInnerContent from "./CardInnerContent";
 import CardDescription from "./CardDescription";
 import "./Card.css";

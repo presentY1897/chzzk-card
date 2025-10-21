@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import type { CardData, ChzzkClipInfo } from "@/types";
+import type { CardData } from "@/types";
+import "./CardDescription.css";
 
 interface CardDescriptionProps {
   card: CardData;
