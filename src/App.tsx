@@ -6,6 +6,7 @@ import cardData from "./data.json";
 import "./App.css";
 import { useFetchChzzkClipRecommendedList } from "./hooks/useChzzkFetch";
 import type { ChzzkClipPreviewInfo } from "./types";
+import { convertChzzkPreviewClipInfoToCardData } from "./tools/dataTool";
 
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -22,19 +23,7 @@ function App() {
         {cardList?.map((item: ChzzkClipPreviewInfo, index: number) => (
           <Card
             key={index}
-            card={{
-              id: index,
-              type: "image",
-              effects: ["border"],
-              src: item.thumbnailImageUrl,
-              clipId: item.clipUID,
-              title: item.clipTitle,
-              edition: {
-                name: item.ownerChannel?.channelName,
-                imageUrl: item.ownerChannel?.channelImageUrl,
-              },
-              date: item.createdDate,
-            }}
+            card={convertChzzkPreviewClipInfoToCardData(item, index)}
             initialCardFaceState="back"
             onClick={() => setSelectedId(index)}
           />
