@@ -6,6 +6,7 @@ import "./App.css";
 import { useFetchChzzkClipRecommendedList } from "./hooks/useChzzkFetch";
 import type { ChzzkClipPreviewInfo } from "./types";
 import { convertChzzkPreviewClipInfoToCardData } from "./tools/dataTool";
+import CardStack from "./components/CardStack";
 
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="card-grid">
+      {/* <div className="card-grid">
         {cardList?.map((item: ChzzkClipPreviewInfo, index: number) => (
           <Card
             key={index}
@@ -39,7 +40,19 @@ function App() {
             onClick={() => setSelectedId(index)}
           />
         ))}
-      </div>
+      </div> */}
+      <CardStack
+        cardList={cardList
+          ?.map((item: ChzzkClipPreviewInfo, index: number) => (
+            <Card
+              key={index}
+              card={convertChzzkPreviewClipInfoToCardData(item, index)}
+              initialCardFaceState="front"
+              onClick={() => setSelectedId(index)}
+            />
+          ))
+          .slice(0, 10)}
+      />
 
       <AnimatePresence>
         {selectedCard && (
