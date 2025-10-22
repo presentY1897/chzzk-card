@@ -57,7 +57,7 @@ export default function Cube({
         </motion.div>
         <motion.div
           className="side back"
-          style={{ rotateY: "180deg", translateZ: `${halfLength}px` }}
+          style={{ rotateY: "180deg", translateZ: `-${halfLength}px` }}
         >
           {backContent}
         </motion.div>
@@ -68,7 +68,7 @@ export default function Cube({
               style={{
                 width: `${halfLength * 2}px`,
                 rotateY: "-90deg",
-                translateZ: `${halfLength}px`,
+                translateX: `-${halfLength}px`,
               }}
             >
               {leftContent}
@@ -78,7 +78,7 @@ export default function Cube({
               style={{
                 width: `${halfLength * 2}px`,
                 rotateY: "90deg",
-                translateZ: `${halfHeight * 2 - halfLength}px`,
+                translateX: `${halfWidth * 2 - halfLength}px`,
               }}
             >
               {rightContent}
@@ -88,7 +88,7 @@ export default function Cube({
               style={{
                 height: `${halfLength * 2}px`,
                 rotateX: "90deg",
-                translateZ: `${halfLength}px`,
+                translateY: `-${halfLength}px`,
               }}
             >
               {topContent}
@@ -98,7 +98,7 @@ export default function Cube({
               style={{
                 height: `${halfLength * 2}px`,
                 rotateX: "-90deg",
-                translateZ: `${halfHeight * 2 - halfLength}px`,
+                translateY: `${halfHeight * 2 - halfLength}px`,
               }}
             >
               {bottomContent}
