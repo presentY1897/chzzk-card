@@ -1,0 +1,23 @@
+.card-stack-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh; /* mobile safari에서 스크롤 생겨서 우선 90으로 했는데 좋은 방법 찾아봐야할듯 */
+  width: 100vw;
+}
+
+.card-stack {
+  position: relative;
+  width: 240px;
+  height: 360px;
+  padding: 0;
+}
+
+.card-stack-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center;
+  list-style: none;
+}
