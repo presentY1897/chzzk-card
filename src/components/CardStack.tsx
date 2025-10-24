@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import move from "lodash-move";
 import "./CardStack.css";
@@ -8,6 +8,11 @@ const SCALE_FACTOR = 0.006;
 
 const CardStack = ({ cardList }: { cardList: React.ReactElement[] }) => {
   const [cards, setCards] = React.useState(cardList);
+
+  useEffect(() => {
+    setCards(cardList);
+  }, [cardList]);
+
   const moveToEnd = (from: number) => {
     setCards(move(cards, from, cards.length - 1));
   };
