@@ -23,36 +23,9 @@ const CardPack = ({
     <div className="card-pack-container">
       <Cube
         frontContent={
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "rgba(25,25,25, 1)",
-                width: "98%",
-                height: "10%",
-              }}
-            ></div>
-            <div
-              style={{
-                backgroundColor: "rgba(30, 30, 30, 1)",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: "35px",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative",
-              }}
-            >
+          <div className="pack-front">
+            <div className="pack-front-margin"></div>
+            <div className="pack-front-middle">
               <div className="card-pack-strip" />
               <img
                 style={{ width: "70%", transform: "rotate(-10deg)" }}
@@ -64,13 +37,7 @@ const CardPack = ({
               </span>
               <div className="card-pack-strip downside" />
             </div>
-            <div
-              style={{
-                backgroundColor: "rgba(25,25,25, 1)",
-                width: "98%",
-                height: "10%",
-              }}
-            ></div>
+            <div className="pack-front-margin"></div>
           </div>
         }
         backContent={
