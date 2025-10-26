@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import CardPack from "./components/CardPack";
+import CardPack from "./components/card-pack/CardPack";
 import { useFetchChzzkClipRecommendedList } from "./hooks/useChzzkFetch";
 import type { ChzzkClipPreviewInfo } from "./types";
 import "./App.css";

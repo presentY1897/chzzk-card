@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { ChzzkClipPreviewInfo } from "@/types";
 import "./CardPack.css";
-import CardStack from "./CardStack";
-import Cube from "./Cube";
-import Card from "./card/Card";
+import CardStack from "../CardStack";
+import Cube from "../Cube";
+import Card from "../card/Card";
 import { convertChzzkPreviewClipInfoToCardData } from "@/tools/dataTool";
 
 const CardPack = ({
