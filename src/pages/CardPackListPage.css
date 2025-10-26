@@ -1,0 +1,7 @@
+.card-pack-grid {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

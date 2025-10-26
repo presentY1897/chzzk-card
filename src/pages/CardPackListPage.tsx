@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import CardPack from "@/components/card-pack/CardPack";
 import { useFetchChzzkClipRecommendedList } from "@/hooks/useChzzkFetch";
 import type { ChzzkClipPreviewInfo } from "@/types";
-import "@/App.css";
-import CardStack from "@/components/CardStack";
+import "./CardPackListPage.css";
 
 function CardPackListPage() {
   const { data: cardList, loading, error } = useFetchChzzkClipRecommendedList();
@@ -33,23 +32,17 @@ function CardPackListPage() {
     return <div className="error-message">Error: {error.message}</div>;
   }
 
-  return (
-    <div className="App">
-      <div>
-        <CardStack
-          cardList={Object.keys(groupedPacks)
-            .filter((category) => groupedPacks[category].length > 0)
-            .map((category) => (
-              <CardPack
-                key={category}
-                cardList={groupedPacks[category]}
-                packName={category}
-              />
-            ))}
-        />
-      </div>
-    </div>
-  );
+  const cardPacks = Object.keys(groupedPacks)
+    .filter((category) => groupedPacks[category].length > 0)
+    .map((category) => (
+      <CardPack
+        key={category}
+        cardList={groupedPacks[category]}
+        packName={category}
+      />
+    ));
+
+  return <div className="card-pack-grid">{cardPacks}</div>;
 }
 
 export default CardPackListPage;
