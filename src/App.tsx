@@ -1,21 +1,29 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import Card from "./components/card/Card";
-import CardDetail from "./components/CardDetail";
-import "./App.css";
+import { useState, useEffect } from "react";
+import CardPack from "./components/card-pack/CardPack";
 import { useFetchChzzkClipRecommendedList } from "./hooks/useChzzkFetch";
 import type { ChzzkClipPreviewInfo } from "./types";
-import { convertChzzkPreviewClipInfoToCardData } from "./tools/dataTool";
+import "./App.css";
 import CardStack from "./components/CardStack";
 
 function App() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
   const { data: cardList, loading, error } = useFetchChzzkClipRecommendedList();
+  const [groupedPacks, setGroupedPacks] = useState<
+    Record<string, ChzzkClipPreviewInfo[]>
+  >({});
 
-  const selectedCard =
-    selectedId !== null
-      ? convertChzzkPreviewClipInfoToCardData(cardList[selectedId], selectedId)
-      : null;
+  useEffect(() => {
+    if (cardList && cardList.length > 0) {
+      const grouped = cardList.reduce((acc, item) => {
+        const category = item.clipCategory || "기타";
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(item);
+        return acc;
+      }, {} as Record<string, ChzzkClipPreviewInfo[]>);
+      setGroupedPacks(grouped);
+    }
+  }, [cardList]);
 
   if (loading) {
     return <div className="loading-message">Loading...</div>;
@@ -31,34 +39,19 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div className="card-grid">
-        {cardList?.map((item: ChzzkClipPreviewInfo, index: number) => (
-          <Card
-            key={index}
-            card={convertChzzkPreviewClipInfoToCardData(item, index)}
-            initialCardFaceState="back"
-            onClick={() => setSelectedId(index)}
-          />
-        ))}
-      </div> */}
-      <CardStack
-        cardList={cardList
-          ?.map((item: ChzzkClipPreviewInfo, index: number) => (
-            <Card
-              key={index}
-              card={convertChzzkPreviewClipInfoToCardData(item, index)}
-              initialCardFaceState="front"
-              onClick={() => setSelectedId(index)}
-            />
-          ))
-          .slice(0, 10)}
-      />
-
-      <AnimatePresence>
-        {selectedCard && (
-          <CardDetail onClick={() => setSelectedId(null)} {...selectedCard} />
-        )}
-      </AnimatePresence>
+      <div>
+        <CardStack
+          cardList={Object.keys(groupedPacks)
+            .filter((category) => groupedPacks[category].length > 0)
+            .map((category) => (
+              <CardPack
+                key={category}
+                cardList={groupedPacks[category]}
+                packName={category}
+              />
+            ))}
+        />
+      </div>
     </div>
   );
 }
