@@ -45,13 +45,13 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) translateZ(48px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
   border-radius: 22px;
   background: radial-gradient(
     circle at var(--x) var(--y),
-    hsl(180, 100%, 75%),
-    hsl(240, 100%, 75%),
+    hsl(158, 100%, 50%),
+    hsl(78, 100%, 50%),
     transparent 40%
   );
   z-index: 1;
