@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { ChzzkClipPreviewInfo } from "@/types";
+import { BASE_CARD_PACK_STYLE } from "@/config";
 import "./CardPack.css";
-import CardStack from "../CardStack";
-import Cube from "../Cube";
-import Card from "../card/Card";
+import CardStack from "@/components/CardStack";
+import Cube from "@/components/Cube";
+import Card from "@/components/card/Card";
 import { convertChzzkPreviewClipInfoToCardData } from "@/tools/dataTool";
 
 const CardPack = ({
@@ -18,6 +19,8 @@ const CardPack = ({
   const handleBackDoubleClick = () => {
     setIsBackVisible(false);
   };
+
+  const { halfWidth, halfHeight, halfLength } = BASE_CARD_PACK_STYLE;
 
   return (
     <div className="card-pack-container">
@@ -108,9 +111,9 @@ const CardPack = ({
             }}
           ></div>
         }
-        halfHeight={200}
-        halfWidth={130}
-        halfLength={3}
+        halfHeight={halfHeight}
+        halfWidth={halfWidth}
+        halfLength={halfLength}
       />
     </div>
   );
