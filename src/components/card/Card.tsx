@@ -12,15 +12,12 @@ interface CardProps {
 }
 
 const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
-  const { id, effects = [], rarity } = card;
+  const { effects = [], rarity } = card;
 
   return (
     <Cube
       frontContent={
-        <motion.div
-          className="card-container"
-          layoutId={`card-container-${id}`}
-        >
+        <motion.div className="card-container">
           {effects.includes("border") && (
             <div className="card-border" data-rarity={rarity}></div>
           )}
