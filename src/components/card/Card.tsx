@@ -18,7 +18,7 @@ const CardFront = ({ card }: { card: CardData }) => {
   return (
     <motion.div className="border card-container">
       {effects.includes("border") && (
-        <div className="card-border" data-rarity={rarity}></div>
+        <div className="card-border-effect" data-rarity={rarity}></div>
       )}
       <div className="card">
         <CardSurfaceEffects effects={effects} />

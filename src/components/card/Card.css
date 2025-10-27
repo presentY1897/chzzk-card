@@ -40,7 +40,7 @@
   justify-content: flex-end;
 }
 
-.card-border {
+.card-border-effect {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -57,7 +57,7 @@
   z-index: 1;
 }
 
-.card-border[data-rarity="rare"] {
+.card-border-effect[data-rarity="rare"] {
   background: radial-gradient(
     circle at var(--x) var(--y),
     hsl(200, 100%, 80%),
@@ -66,7 +66,7 @@
   );
 }
 
-.card-border[data-rarity="epic"] {
+.card-border-effect[data-rarity="epic"] {
   background: radial-gradient(
     circle at var(--x) var(--y),
     hsl(270, 100%, 80%),
@@ -75,7 +75,7 @@
   );
 }
 
-.card-border[data-rarity="legendary"] {
+.card-border-effect[data-rarity="legendary"] {
   background: radial-gradient(
     circle at var(--x) var(--y),
     hsl(50, 100%, 70%),
