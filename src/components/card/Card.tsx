@@ -16,7 +16,7 @@ const CardFront = ({ card }: { card: CardData }) => {
   const { rarity, effects = [] } = card;
 
   return (
-    <motion.div className="card-container">
+    <motion.div className="border card-container">
       {effects.includes("border") && (
         <div className="card-border" data-rarity={rarity}></div>
       )}
@@ -33,7 +33,10 @@ const CardFront = ({ card }: { card: CardData }) => {
 
 const CardBack = () => {
   return (
-    <motion.div className="card-container" style={{ backgroundColor: "black" }}>
+    <motion.div
+      className="border card-container"
+      style={{ backgroundColor: "black" }}
+    >
       <img style={{ width: "70%" }} src={"./images/chzzklogo_kor(Green).png"} />
     </motion.div>
   );
