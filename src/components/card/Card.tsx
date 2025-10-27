@@ -11,36 +11,38 @@ interface CardProps {
   initialCardFaceState: "front" | "back";
 }
 
-const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
-  const { effects = [], rarity } = card;
+const CardFront = ({ card }: { card: CardData }) => {
+  const { rarity, effects = [] } = card;
 
   return (
+    <motion.div className="card-container">
+      {effects.includes("border") && (
+        <div className="card-border" data-rarity={rarity}></div>
+      )}
+      <div className="card">
+        <CardSurfaceEffects effects={effects} />
+        <div className="card-content">
+          <CardInnerContent card={card} />
+          <CardDescription card={card} />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const CardBack = () => {
+  return (
+    <motion.div className="card-container" style={{ backgroundColor: "black" }}>
+      <img style={{ width: "70%" }} src={"./images/chzzklogo_kor(Green).png"} />
+    </motion.div>
+  );
+};
+
+const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
+  return (
     <Cube
-      frontContent={
-        <motion.div className="card-container">
-          {effects.includes("border") && (
-            <div className="card-border" data-rarity={rarity}></div>
-          )}
-          <div className="card">
-            <CardSurfaceEffects effects={effects} />
-            <div className="card-content">
-              <CardInnerContent card={card} />
-              <CardDescription card={card} />
-            </div>
-          </div>
-        </motion.div>
-      }
-      backContent={
-        <motion.div
-          className="card-container"
-          style={{ backgroundColor: "black" }}
-        >
-          <img
-            style={{ width: "70%" }}
-            src={"./images/chzzklogo_kor(Green).png"}
-          />
-        </motion.div>
-      }
+      frontContent={<CardFront card={card} />}
+      backContent={<CardBack />}
       halfWidth={120}
       halfHeight={180}
       halfLength={0}
