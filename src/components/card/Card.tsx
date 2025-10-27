@@ -35,7 +35,11 @@ const CardBack = () => {
   return (
     <motion.div
       className="border card-container"
-      style={{ backgroundColor: "black" }}
+      style={{
+        backgroundColor: "black",
+        userSelect: "none",
+        cursor: "grab",
+      }}
     >
       <img style={{ width: "70%" }} src={"./images/chzzklogo_kor(Green).png"} />
     </motion.div>
