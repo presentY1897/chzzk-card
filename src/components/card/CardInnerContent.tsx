@@ -7,12 +7,9 @@ interface CardInnerContentProps {
 }
 
 const CardInnerContent = ({ card }: CardInnerContentProps) => {
-  const { id, type, src, title, alt = "Card media" } = card;
+  const { type, src, title, alt = "Card media" } = card;
   return (
-    <motion.div
-      className="card-media-wrapper"
-      layoutId={`card-media-wrapper-${id}`}
-    >
+    <motion.div className="card-media-wrapper">
       {type === "image" && <img className="card-media" src={src} alt={alt} />}
       {type === "video" && (
         <video
