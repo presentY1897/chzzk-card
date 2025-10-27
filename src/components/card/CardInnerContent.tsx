@@ -7,30 +7,10 @@ interface CardInnerContentProps {
 }
 
 const CardInnerContent = ({ card }: CardInnerContentProps) => {
-  const { type, src, title, alt = "Card media" } = card;
+  const { src, alt = "Card media" } = card;
   return (
     <motion.div className="card-media-wrapper">
-      {type === "image" && <img className="card-media" src={src} alt={alt} />}
-      {type === "video" && (
-        <video
-          className="card-media"
-          src={src}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      )}
-      {type === "embed" && (
-        <iframe
-          className="card-media card-embed"
-          src={src}
-          title={title || "Embedded Content"}
-          frameBorder="0"
-          // allow="autoplay; clipboard-write; web-share"
-          allowFullScreen
-        ></iframe>
-      )}
+      <img className="card-media" src={src} alt={alt} />
     </motion.div>
   );
 };
