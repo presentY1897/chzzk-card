@@ -67,8 +67,8 @@ export const useCubeTilt = () => {
 
 	const handlePointerLeave = () => {
 		if (!ref.current) return;
-		x.set(0);
-		y.set(0);
+		animate(x, 0, { duration: 0.3, ease: 'easeOut' });
+		animate(y, 0, { duration: 0.3, ease: 'easeOut' });
 		ref.current.style.setProperty('--x', `50%`);
 		ref.current.style.setProperty('--y', `50%`);
 	};
