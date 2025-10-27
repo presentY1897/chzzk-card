@@ -9,7 +9,6 @@ export interface CardData {
   clipId?: string;
   title?: string;
   alt?: string;
-  description?: string;
   edition?: {
     name: string;
     imageUrl: string;
