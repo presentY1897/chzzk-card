@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { CardData } from "@/types";
+import { BASE_CARD_STYLE } from "@/config";
 import Cube from "@/components/Cube";
 import CardSurfaceEffects from "@/components/card/CardEffects";
 import CardInnerContent from "./CardInnerContent";
@@ -39,13 +40,15 @@ const CardBack = () => {
 };
 
 const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
+  const { halfWidth, halfHeight, halfLength } = BASE_CARD_STYLE;
+
   return (
     <Cube
       frontContent={<CardFront card={card} />}
       backContent={<CardBack />}
-      halfWidth={120}
-      halfHeight={180}
-      halfLength={0}
+      halfWidth={halfWidth}
+      halfHeight={halfHeight}
+      halfLength={halfLength}
       initialFace={initialCardFaceState}
     />
   );
