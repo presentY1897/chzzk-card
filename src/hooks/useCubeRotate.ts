@@ -9,39 +9,30 @@ type CubeTiltEventHandlers = {
 	onTouchCancel: () => void;
 };
 
-type CubeEventHandlers = {
-	onClick: () => void;
-} & CubeTiltEventHandlers;
-
-
-export const useCubeRotation = (initialFace: 'front' | 'back' = 'front') => {
-	const { ref, rotateX, rotateY: tiltRotateY, eventHandlers: cubeTiltEventHandlers } = useCubeTilt();
-	const { rotateY: flipRotateY, handleOnClick } = useCubeFlip(initialFace);
-
-	const rotateY = useTransform(
-		[tiltRotateY, flipRotateY],
-		([latestTilt, latestFlip]: number[]) => latestTilt + latestFlip
-	);
-
-	const eventHandlers: CubeEventHandlers = {
-		...cubeTiltEventHandlers,
-		onClick: handleOnClick
-	}
-
-	return { ref, rotateX, rotateY, eventHandlers };
+type CubeTiltConfig = {
+	activate: boolean;
+	maxRotateX: number;
+	maxRotateY: number;
 }
 
-export const useCubeTilt = () => {
+const DEFAULT_CUBE_TILT_CONFIG: CubeTiltConfig = {
+	activate: true,
+	maxRotateX: 20,
+	maxRotateY: 20,
+}
+
+export const useCubeTilt = (config: Partial<CubeTiltConfig> = {}) => {
+	const { activate, maxRotateX, maxRotateY } = { ...DEFAULT_CUBE_TILT_CONFIG, ...config };
 	const x = useMotionValue(0);
 	const y = useMotionValue(0);
 
-	const rotateX = useTransform(x, [-100, 100], [-20, 20]);
-	const rotateY = useTransform(y, [-100, 100], [-20, 20]);
+	const rotateX = useTransform(x, [-100, 100], [-maxRotateX, maxRotateX]);
+	const rotateY = useTransform(y, [-100, 100], [-maxRotateY, maxRotateY]);
 
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handlePointerMove = (clientX: number, clientY: number) => {
-		if (!ref.current) return;
+		if (!ref.current || !activate) return;
 		const rect = ref.current.getBoundingClientRect();
 		const localX = clientX - rect.left;
 		const localY = clientY - rect.top;
@@ -66,7 +57,7 @@ export const useCubeTilt = () => {
 	};
 
 	const handlePointerLeave = () => {
-		if (!ref.current) return;
+		if (!ref.current || !activate) return;
 		animate(x, 0, { duration: 0.3, ease: 'easeOut' });
 		animate(y, 0, { duration: 0.3, ease: 'easeOut' });
 		ref.current.style.setProperty('--x', `50%`);
@@ -89,7 +80,18 @@ export const useCubeTilt = () => {
 	};
 }
 
-export const useCubeFlip = (initialFace: 'front' | 'back' = 'front') => {
+type CubeFlipConfig = {
+	activate: boolean;
+	initialFace: 'front' | 'back';
+}
+
+const DEFAULT_CUBE_FLIP_CONFIG: CubeFlipConfig = {
+	activate: true,
+	initialFace: 'front',
+}
+
+export const useCubeFlip = (config: Partial<CubeFlipConfig> = {}) => {
+	const { activate, initialFace } = { ...DEFAULT_CUBE_FLIP_CONFIG, ...config };
 	const rotateY = useMotionValue(initialFace === 'front' ? 0 : 180);
 	const [face, setFace] = useState(initialFace);
 
@@ -98,6 +100,7 @@ export const useCubeFlip = (initialFace: 'front' | 'back' = 'front') => {
 	}, [face, rotateY]);
 
 	const handleOnClick = () => {
+		if (!activate) return;
 		setFace(prev => prev === 'front' ? 'back' : 'front');
 	}
 
@@ -106,4 +109,32 @@ export const useCubeFlip = (initialFace: 'front' | 'back' = 'front') => {
 		handleOnClick,
 	}
 
+}
+
+type CubeRotationConfig = {
+	tiltConfig: Partial<CubeTiltConfig>;
+	flipConfig: Partial<CubeFlipConfig>;
+};
+
+type CubeEventHandlers = {
+	onClick: () => void;
+} & CubeTiltEventHandlers;
+
+
+export const useCubeRotation = (config: Partial<CubeRotationConfig> = {}) => {
+	const { tiltConfig, flipConfig } = config;
+	const { ref, rotateX, rotateY: tiltRotateY, eventHandlers: cubeTiltEventHandlers } = useCubeTilt(tiltConfig);
+	const { rotateY: flipRotateY, handleOnClick } = useCubeFlip(flipConfig);
+
+	const rotateY = useTransform(
+		[tiltRotateY, flipRotateY],
+		([latestTilt, latestFlip]: number[]) => latestTilt + latestFlip
+	);
+
+	const eventHandlers: CubeEventHandlers = {
+		...cubeTiltEventHandlers,
+		onClick: handleOnClick
+	}
+
+	return { ref, rotateX, rotateY, eventHandlers };
 }

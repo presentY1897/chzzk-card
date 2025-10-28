@@ -26,9 +26,15 @@ export default function Cube({
   halfWidth,
   halfHeight,
   halfLength = 0,
-  initialFace = "front",
 }: CubeData) {
-  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation(initialFace);
+  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation({
+    tiltConfig: {
+      activate: false,
+    },
+    flipConfig: {
+      activate: false,
+    },
+  });
 
   return (
     <div
