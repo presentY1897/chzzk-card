@@ -13,7 +13,7 @@ function CardStackPage() {
           <Card
             key={index}
             card={convertChzzkPreviewClipInfoToCardData(card, index)}
-            initialCardFaceState="back"
+            initialCardFaceState="front"
           />
         ))}
       />
