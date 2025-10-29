@@ -4,7 +4,7 @@ import type { CardData, ChzzkClipPreviewInfo } from "@/types";
 export const convertChzzkPreviewClipInfoToCardData = (clipInfo: ChzzkClipPreviewInfo, id: number) => {
 	const cardData: CardData = {
 		id,
-		effects: ['border'],
+		effects: ['border', 'sparkle'],
 		src: clipInfo.thumbnailImageUrl,
 		clipId: clipInfo.clipUID,
 		title: clipInfo.clipTitle,

@@ -61,15 +61,7 @@
   mix-blend-mode: screen;
   z-index: 5;
   pointer-events: none;
-  animation: sparkle-animation 4s infinite linear;
-}
-
-@keyframes sparkle-animation {
-  0% { opacity: 0.2; }
-  25% { opacity: 0.8; }
-  50% { opacity: 0.4; }
-  75% { opacity: 1; }
-  100% { opacity: 0.2; }
+  opacity: 0.6;
 }
 
 .card-interactive-sparkle {
