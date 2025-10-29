@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { CardData } from "@/types";
+import { BASE_CARD_STYLE } from "@/config";
 import Cube from "@/components/Cube";
 import CardSurfaceEffects from "@/components/card/CardEffects";
 import CardInnerContent from "./CardInnerContent";
@@ -8,46 +9,65 @@ import "./Card.css";
 
 interface CardProps {
   card: CardData;
-  initialCardFaceState: "front" | "back";
+  tiltable?: boolean;
+  tiltDeg?: {
+    maxX: number;
+    maxY: number;
+  };
+  flippable?: boolean;
+  initialFace?: "front" | "back";
 }
 
-const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
-  const { id, effects = [], rarity } = card;
+const CardFront = ({ card }: { card: CardData }) => {
+  const { rarity, effects = [] } = card;
+
+  return (
+    <motion.div className="border card-container">
+      {effects.includes("border") && (
+        <div className="card-border-effect" data-rarity={rarity}></div>
+      )}
+      <div className="card">
+        <CardSurfaceEffects effects={effects} />
+        <div className="card-content">
+          <CardInnerContent card={card} />
+          <CardDescription card={card} />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const CardBack = () => {
+  return (
+    <motion.div
+      className="border card-container"
+      style={{ backgroundColor: "black" }}
+    >
+      <img style={{ width: "70%" }} src={"./images/chzzklogo_kor(Green).png"} />
+    </motion.div>
+  );
+};
+
+const Card = ({
+  card,
+  flippable = true,
+  initialFace = "front",
+  tiltable = true,
+  tiltDeg = { maxX: 20, maxY: 20 },
+}: CardProps) => {
+  const { halfWidth, halfHeight, halfLength } = BASE_CARD_STYLE;
 
   return (
     <Cube
-      frontContent={
-        <motion.div
-          className="card-container"
-          layoutId={`card-container-${id}`}
-        >
-          {effects.includes("border") && (
-            <div className="card-border" data-rarity={rarity}></div>
-          )}
-          <div className="card">
-            <CardSurfaceEffects effects={effects} />
-            <div className="card-content">
-              <CardInnerContent card={card} />
-              <CardDescription card={card} />
-            </div>
-          </div>
-        </motion.div>
-      }
-      backContent={
-        <motion.div
-          className="card-container"
-          style={{ backgroundColor: "black" }}
-        >
-          <img
-            style={{ width: "70%" }}
-            src={"./images/chzzklogo_kor(Green).png"}
-          />
-        </motion.div>
-      }
-      halfWidth={120}
-      halfHeight={180}
-      halfLength={0}
-      initialFace={initialCardFaceState}
+      frontContent={<CardFront card={card} />}
+      backContent={<CardBack />}
+      halfWidth={halfWidth}
+      halfHeight={halfHeight}
+      halfLength={halfLength}
+      flippable={flippable}
+      initialFace={initialFace}
+      tiltable={tiltable}
+      tiltDeg={tiltDeg}
     />
   );
 };

@@ -7,7 +7,7 @@ interface CardDescriptionProps {
 }
 
 const CardDescription = ({ card }: CardDescriptionProps) => {
-  const { id, title, description, edition, date } = card;
+  const { id, title, edition, date } = card;
   const displayTitle = title;
   const displayCardStreamer = edition?.name;
   const channelImageUrl = edition?.imageUrl;
@@ -23,14 +23,6 @@ const CardDescription = ({ card }: CardDescriptionProps) => {
         </motion.h2>
       )}
       <footer className="card-footer">
-        {description && (
-          <motion.p
-            className="card-description"
-            layoutId={`card-description-${id}`}
-          >
-            {description}
-          </motion.p>
-        )}
         <div className="card-footer-info">
           <div className="card-edition">
             {channelImageUrl && (
