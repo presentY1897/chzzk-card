@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { type ReactNode } from "react";
-import { useInteractiveTransform } from "@/hooks/useCubeRotate";
+import { useInteractiveTransform } from "@/hooks/useInteractiveTransform";
 import "./Cube.css";
 
 export interface CubeProps {
