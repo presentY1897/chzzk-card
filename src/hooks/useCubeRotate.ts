@@ -111,7 +111,7 @@ export const useCubeFlip = (config: Partial<CubeFlipConfig> = {}) => {
 
 }
 
-type CubeRotationConfig = {
+type CubeInteractiveTransformConfig = {
 	tiltConfig: Partial<CubeTiltConfig>;
 	flipConfig: Partial<CubeFlipConfig>;
 };
@@ -121,7 +121,7 @@ type CubeEventHandlers = {
 } & CubeTiltEventHandlers;
 
 
-export const useCubeRotation = (config: Partial<CubeRotationConfig> = {}) => {
+export const useInteractiveTransform = (config: Partial<CubeInteractiveTransformConfig> = {}) => {
 	const { tiltConfig, flipConfig } = config;
 	const { ref, rotateX, rotateY: tiltRotateY, eventHandlers: cubeTiltEventHandlers } = useCubeTilt(tiltConfig);
 	const { rotateY: flipRotateY, handleOnClick } = useCubeFlip(flipConfig);

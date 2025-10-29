@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { type ReactNode } from "react";
-import { useCubeRotation } from "@/hooks/useCubeRotate";
+import { useInteractiveTransform } from "@/hooks/useCubeRotate";
 import "./Cube.css";
 
 export interface CubeProps {
@@ -45,7 +45,7 @@ export default function Cube(cubeProps: CubeProps) {
   };
 
   const { ref, rotateX, rotateY, eventHandlers } =
-    useCubeRotation(rotationConfig);
+    useInteractiveTransform(rotationConfig);
 
   return (
     <div
