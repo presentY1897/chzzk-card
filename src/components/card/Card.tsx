@@ -9,7 +9,13 @@ import "./Card.css";
 
 interface CardProps {
   card: CardData;
-  initialCardFaceState: "front" | "back";
+  tiltable?: boolean;
+  tiltDeg?: {
+    maxX: number;
+    maxY: number;
+  };
+  flippable?: boolean;
+  initialFace?: "front" | "back";
 }
 
 const CardFront = ({ card }: { card: CardData }) => {
@@ -35,18 +41,20 @@ const CardBack = () => {
   return (
     <motion.div
       className="border card-container"
-      style={{
-        backgroundColor: "black",
-        userSelect: "none",
-        cursor: "grab",
-      }}
+      style={{ backgroundColor: "black" }}
     >
       <img style={{ width: "70%" }} src={"./images/chzzklogo_kor(Green).png"} />
     </motion.div>
   );
 };
 
-const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
+const Card = ({
+  card,
+  flippable = true,
+  initialFace = "front",
+  tiltable = true,
+  tiltDeg = { maxX: 20, maxY: 20 },
+}: CardProps) => {
   const { halfWidth, halfHeight, halfLength } = BASE_CARD_STYLE;
 
   return (
@@ -56,7 +64,10 @@ const Card = ({ card, initialCardFaceState = "front" }: CardProps) => {
       halfWidth={halfWidth}
       halfHeight={halfHeight}
       halfLength={halfLength}
-      initialFace={initialCardFaceState}
+      flippable={flippable}
+      initialFace={initialFace}
+      tiltable={tiltable}
+      tiltDeg={tiltDeg}
     />
   );
 };

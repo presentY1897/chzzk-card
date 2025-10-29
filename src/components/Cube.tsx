@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { useCubeRotation } from "@/hooks/useCubeRotate";
 import "./Cube.css";
 
-export interface CubeData {
+export interface CubeProps {
   frontContent?: ReactNode;
   backContent?: ReactNode;
   leftContent?: ReactNode;
@@ -13,28 +13,39 @@ export interface CubeData {
   halfWidth: number;
   halfHeight: number;
   halfLength: number;
+  flippable?: boolean;
+  tiltable?: boolean;
   initialFace?: "front" | "back";
+  tiltDeg?: {
+    maxX: number;
+    maxY: number;
+  };
 }
 
-export default function Cube({
-  frontContent,
-  backContent,
-  leftContent,
-  rightContent,
-  topContent,
-  bottomContent,
-  halfWidth,
-  halfHeight,
-  halfLength = 0,
-}: CubeData) {
-  const { ref, rotateX, rotateY, eventHandlers } = useCubeRotation({
+export default function Cube(cubeProps: CubeProps) {
+  const {
+    frontContent,
+    backContent,
+    leftContent,
+    rightContent,
+    topContent,
+    bottomContent,
+  } = cubeProps;
+  const { halfWidth, halfHeight, halfLength } = cubeProps;
+  const rotationConfig = {
     tiltConfig: {
-      activate: false,
+      activate: cubeProps.tiltable,
+      maxRotateX: cubeProps.tiltDeg?.maxX,
+      maxRotateY: cubeProps.tiltDeg?.maxY,
     },
     flipConfig: {
-      activate: false,
+      activate: cubeProps.flippable,
+      initialFace: cubeProps.initialFace,
     },
-  });
+  };
+
+  const { ref, rotateX, rotateY, eventHandlers } =
+    useCubeRotation(rotationConfig);
 
   return (
     <div
