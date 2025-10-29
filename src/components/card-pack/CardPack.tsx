@@ -1,25 +1,23 @@
-import { useState } from "react";
-import type { ChzzkClipPreviewInfo } from "@/types";
 import { BASE_CARD_PACK_STYLE } from "@/config";
-import "./CardPack.css";
-import CardStack from "@/components/CardStack";
 import Cube from "@/components/Cube";
-import Card from "@/components/card/Card";
-import { convertChzzkPreviewClipInfoToCardData } from "@/tools/dataTool";
+import "./CardPack.css";
 
 const CardPack = ({
-  cardList,
   packName,
+  tiltable = true,
+  tiltDeg = { maxX: 45, maxY: 45 },
+  flippable = true,
+  initialFace = "front",
 }: {
-  cardList: ChzzkClipPreviewInfo[];
   packName: string;
-}) => {
-  const [isBackVisible, setIsBackVisible] = useState(true);
-
-  const handleBackDoubleClick = () => {
-    setIsBackVisible(false);
+  tiltable?: boolean;
+  tiltDeg?: {
+    maxX: number;
+    maxY: number;
   };
-
+  flippable?: boolean;
+  initialFace?: "front" | "back";
+}) => {
   const { halfWidth, halfHeight, halfLength } = BASE_CARD_PACK_STYLE;
 
   return (
@@ -44,36 +42,21 @@ const CardPack = ({
           </div>
         }
         backContent={
-          <>
-            <CardStack
-              cardList={cardList
-                ?.map((item: ChzzkClipPreviewInfo, index: number) => (
-                  <Card
-                    key={index}
-                    card={convertChzzkPreviewClipInfoToCardData(item, index)}
-                    initialCardFaceState="front"
-                  />
-                ))
-                .slice(0, 10)}
-            />
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+            }}
+          >
             <div
-              onDoubleClick={handleBackDoubleClick}
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                zIndex: 99999,
-                display: isBackVisible ? "flex" : "none",
-              }}
-            >
-              <div
-                style={{ width: "50%", backgroundColor: "rgba(20,20,20, 1)" }}
-              ></div>
-              <div
-                style={{ width: "50%", backgroundColor: "rgba(30, 30, 30, 1)" }}
-              ></div>
-            </div>
-          </>
+              style={{ width: "50%", backgroundColor: "rgba(20,20,20, 1)" }}
+            ></div>
+            <div
+              style={{ width: "50%", backgroundColor: "rgba(30, 30, 30, 1)" }}
+            ></div>
+          </div>
         }
         leftContent={
           <div
@@ -114,6 +97,10 @@ const CardPack = ({
         halfHeight={halfHeight}
         halfWidth={halfWidth}
         halfLength={halfLength}
+        tiltable={tiltable}
+        tiltDeg={tiltDeg}
+        flippable={flippable}
+        initialFace={initialFace}
       />
     </div>
   );
