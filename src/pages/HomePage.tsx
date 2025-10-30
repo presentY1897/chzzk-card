@@ -1,6 +1,5 @@
 import Card from "@/components/card/Card";
 import { useFetchChzzkClipRecommendedList } from "@/hooks/useChzzkFetch";
-import { useMediaQuery } from "@/hooks/useMediaQuery"; // Import the new hook
 import { convertChzzkPreviewClipInfoToCardData } from "@/tools/dataTool";
 import { motion } from "framer-motion";
 import { useState } from "react";
