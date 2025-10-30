@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { useInteractiveTransform } from "@/hooks/useInteractiveTransform";
 import "./Cube.css";
 
-export interface CubeProps {
+export interface CubeData {
   frontContent?: ReactNode;
   backContent?: ReactNode;
   leftContent?: ReactNode;
@@ -16,31 +16,39 @@ export interface CubeProps {
   flippable?: boolean;
   tiltable?: boolean;
   initialFace?: "front" | "back";
+  face?: "front" | "back";
   tiltDeg?: {
     maxX: number;
     maxY: number;
   };
 }
 
-export default function Cube(cubeProps: CubeProps) {
-  const {
-    frontContent,
-    backContent,
-    leftContent,
-    rightContent,
-    topContent,
-    bottomContent,
-  } = cubeProps;
-  const { halfWidth, halfHeight, halfLength } = cubeProps;
+export default function Cube({
+  frontContent,
+  backContent,
+  leftContent,
+  rightContent,
+  topContent,
+  bottomContent,
+  halfWidth,
+  halfHeight,
+  halfLength = 0,
+  flippable,
+  tiltable,
+  initialFace,
+  face,
+  tiltDeg,
+}: CubeData) {
   const rotationConfig = {
     tiltConfig: {
-      activate: cubeProps.tiltable,
-      maxRotateX: cubeProps.tiltDeg?.maxX,
-      maxRotateY: cubeProps.tiltDeg?.maxY,
+      activate: tiltable,
+      maxRotateX: tiltDeg?.maxX,
+      maxRotateY: tiltDeg?.maxY,
     },
     flipConfig: {
-      activate: cubeProps.flippable,
-      initialFace: cubeProps.initialFace,
+      activate: flippable,
+      initialFace,
+      face,
     },
   };
 
