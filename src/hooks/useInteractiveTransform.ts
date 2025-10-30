@@ -1,7 +1,7 @@
 import { animate, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-type CubeTiltEventHandlers = {
+type TiltEventHandlers = {
 	onMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
 	onMouseLeave: () => void;
 	onTouchMove: (event: React.TouchEvent<HTMLDivElement>) => void;
@@ -9,20 +9,20 @@ type CubeTiltEventHandlers = {
 	onTouchCancel: () => void;
 };
 
-type CubeTiltConfig = {
+export type TiltConfig = {
 	activate: boolean;
 	maxRotateX: number;
 	maxRotateY: number;
 }
 
-const DEFAULT_CUBE_TILT_CONFIG: CubeTiltConfig = {
+const DEFAULT_TILT_CONFIG: TiltConfig = {
 	activate: true,
 	maxRotateX: 20,
 	maxRotateY: 20,
 }
 
-export const useCubeTilt = (config: Partial<CubeTiltConfig> = {}) => {
-	const { activate, maxRotateX, maxRotateY } = { ...DEFAULT_CUBE_TILT_CONFIG, ...config };
+export const useTilt = (config: Partial<TiltConfig> = {}) => {
+	const { activate, maxRotateX, maxRotateY } = { ...DEFAULT_TILT_CONFIG, ...config };
 	const x = useMotionValue(0);
 	const y = useMotionValue(0);
 
@@ -64,7 +64,7 @@ export const useCubeTilt = (config: Partial<CubeTiltConfig> = {}) => {
 		ref.current.style.setProperty('--y', `50%`);
 	};
 
-	const eventHandlers: CubeTiltEventHandlers = {
+	const eventHandlers: TiltEventHandlers = {
 		onMouseMove: handleMouseMove,
 		onMouseLeave: handlePointerLeave,
 		onTouchMove: handleTouchMove,
@@ -80,20 +80,29 @@ export const useCubeTilt = (config: Partial<CubeTiltConfig> = {}) => {
 	};
 }
 
-type CubeFlipConfig = {
+export type FlipConfig = {
 	activate: boolean;
 	initialFace: 'front' | 'back';
+	face?: 'front' | 'back';
 }
 
-const DEFAULT_CUBE_FLIP_CONFIG: CubeFlipConfig = {
+const DEFAULT_FLIP_CONFIG: FlipConfig = {
 	activate: true,
 	initialFace: 'front',
 }
 
-export const useCubeFlip = (config: Partial<CubeFlipConfig> = {}) => {
-	const { activate, initialFace } = { ...DEFAULT_CUBE_FLIP_CONFIG, ...config };
+export const useFlip = (config: Partial<FlipConfig> = {}) => {
+	const { activate, initialFace, face: controlledFace } = { ...DEFAULT_FLIP_CONFIG, ...config };
+
 	const rotateY = useMotionValue(initialFace === 'front' ? 0 : 180);
+
 	const [face, setFace] = useState(initialFace);
+
+	useEffect(() => {
+		if (controlledFace !== undefined) {
+			setFace(controlledFace);
+		}
+	}, [controlledFace]);
 
 	useEffect(() => {
 		animate(rotateY, face === 'front' ? 0 : 180, { duration: 1, ease: 'easeOut' });
@@ -111,28 +120,28 @@ export const useCubeFlip = (config: Partial<CubeFlipConfig> = {}) => {
 
 }
 
-type CubeInteractiveTransformConfig = {
-	tiltConfig: Partial<CubeTiltConfig>;
-	flipConfig: Partial<CubeFlipConfig>;
+export type InteractiveTransformConfig = {
+	tiltConfig: Partial<TiltConfig>;
+	flipConfig: Partial<FlipConfig>;
 };
 
-type CubeEventHandlers = {
+type EventHandlers = {
 	onClick: () => void;
-} & CubeTiltEventHandlers;
+} & TiltEventHandlers;
 
 
-export const useInteractiveTransform = (config: Partial<CubeInteractiveTransformConfig> = {}) => {
+export const useInteractiveTransform = (config: Partial<InteractiveTransformConfig> = {}) => {
 	const { tiltConfig, flipConfig } = config;
-	const { ref, rotateX, rotateY: tiltRotateY, eventHandlers: cubeTiltEventHandlers } = useCubeTilt(tiltConfig);
-	const { rotateY: flipRotateY, handleOnClick } = useCubeFlip(flipConfig);
+	const { ref, rotateX, rotateY: tiltRotateY, eventHandlers: tiltEventHandlers } = useTilt(tiltConfig);
+	const { rotateY: flipRotateY, handleOnClick } = useFlip(flipConfig);
 
 	const rotateY = useTransform(
 		[tiltRotateY, flipRotateY],
 		([latestTilt, latestFlip]: number[]) => latestTilt + latestFlip
 	);
 
-	const eventHandlers: CubeEventHandlers = {
-		...cubeTiltEventHandlers,
+	const eventHandlers: EventHandlers = {
+		...tiltEventHandlers,
 		onClick: handleOnClick
 	}
 
