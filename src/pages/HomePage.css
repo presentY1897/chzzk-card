@@ -1,0 +1,113 @@
+/* Define card width as a CSS variable for easy maintenance */
+:root {
+  --card-width: 240px; /* BASE_CARD_STYLE.halfWidth * 2 */
+  --card-padding: 40px; /* Extra space around the card */
+}
+
+/* ... existing styles for .home-layered-container, .fixed-card-layer, etc. ... */
+.home-layered-container {
+  position: relative;
+  width: 100%;
+}
+
+.fixed-card-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.card-wrapper {
+  pointer-events: auto;
+}
+
+.scroll-content-layer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+
+.scroll-section {
+  height: 100vh;
+  display: flex; /* Use flex to center the grid vertically */
+  justify-content: center;
+  align-items: center;
+}
+
+.section-grid {
+  display: grid;
+  width: 100%;
+  /* 3-column layout: [Left Text] [Card Spacer] [Right Text] */
+  grid-template-columns: 1fr calc(var(--card-width) + var(--card-padding)) 1fr;
+  gap: 20px;
+  padding: 2rem;
+}
+
+.spacer-column {
+  /* This column is intentionally left empty. */
+  /* It reserves the space for the fixed card. */
+  grid-column: 2;
+}
+
+.text-content {
+  color: white;
+  grid-row: 1; /* All text content is on the same row */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-content.left-text {
+  grid-column: 1;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.text-content.right-text {
+  grid-column: 3;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* ... (existing styles remain the same) ... */
+
+.text-content p {
+  font-size: 1.5rem;
+  max-width: 450px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Mobile Layout Styles --- */
+.mobile-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.card-wrapper-mobile {
+  /* Give the card some space before the text starts */
+  margin-bottom: 5rem;
+  /* You might want the card to be a bit smaller on mobile */
+  transform: scale(0.9);
+}
+
+/* --- Responsive Styles for Desktop Layout on Mobile --- */
+@media (max-width: 768px) {
+  /* ... (existing media query styles) ... */
+}

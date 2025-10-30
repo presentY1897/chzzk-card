@@ -16,6 +16,7 @@ interface CardProps {
   };
   flippable?: boolean;
   initialFace?: "front" | "back";
+  face?: "front" | "back"; // New prop
 }
 
 const CardFront = ({ card }: { card: CardData }) => {
@@ -54,6 +55,7 @@ const Card = ({
   initialFace = "front",
   tiltable = true,
   tiltDeg = { maxX: 20, maxY: 20 },
+  face,
 }: CardProps) => {
   const { halfWidth, halfHeight, halfLength } = BASE_CARD_STYLE;
 
@@ -68,6 +70,7 @@ const Card = ({
       initialFace={initialFace}
       tiltable={tiltable}
       tiltDeg={tiltDeg}
+      face={face}
     />
   );
 };

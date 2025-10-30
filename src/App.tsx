@@ -3,6 +3,7 @@ import CardPackListPage from "./pages/CardPackListPage";
 import CardListPage from "./pages/CardListPage";
 import CardStackPage from "./pages/CardStackPage";
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Link to="/card-stack">Card Stack</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<CardPackListPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/card-pack-list" element={<CardPackListPage />} />
         <Route path="/card-list" element={<CardListPage />} />
         <Route path="/card-stack" element={<CardStackPage />} />
