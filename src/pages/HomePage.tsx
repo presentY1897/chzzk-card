@@ -8,7 +8,6 @@ import "./HomePage.css";
 const HomePage = () => {
   const { data, loading, error } = useFetchChzzkClipRecommendedList();
   const [isSecondSectionInView, setIsSecondSectionInView] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)"); // Detect screen size
 
   const clip =
     data && data.length > 0 ? data[(Math.random() * data.length) | 0] : null;
