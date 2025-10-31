@@ -72,17 +72,7 @@ const HomePage = () => {
     </>
   );
 
-  // Render different layouts based on screen size
-  return isMobile ? (
-    // --- Mobile Layout ---
-    <div className="mobile-layout-container">
-      <div className="card-wrapper-mobile">
-        {clip && <Card card={convertChzzkPreviewClipInfoToCardData(clip, 0)} />}
-      </div>
-      {sectionsContent}
-    </div>
-  ) : (
-    // --- Desktop Layout ---
+  return (
     <div className="home-layered-container">
       <div className="fixed-card-layer">
         <div className="card-wrapper">
