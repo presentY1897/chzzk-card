@@ -29,11 +29,8 @@ const HomePage = () => {
       <motion.div className="scroll-section" {...sectionAnimation}>
         <div className="section-grid">
           <div className="text-content left-text">
-            <h2>Section 1: Introduction</h2>
-            <p>
-              Here is the description for the first part of the product. The
-              text appears on the left.
-            </p>
+            <h2>클립을 카드로</h2>
+            <p>기억에 남을 만한 클립을 카드로 소장해보기</p>
           </div>
           <div className="spacer-column" />
           <div className="text-content" />
@@ -49,20 +46,28 @@ const HomePage = () => {
           <div className="text-content" />
           <div className="spacer-column" />
           <div className="text-content right-text">
-            <h2>Section 2: Features</h2>
-            <p>
-              Now, the description is on the right. The central card flips to
-              its back.
-            </p>
+            <h2>카드 효과들</h2>
+            <p>다양한 카드 효과를 적용해보기</p>
           </div>
         </div>
       </motion.div>
       <motion.div className="scroll-section" {...sectionAnimation}>
         <div className="section-grid">
           <div className="text-content left-text">
-            <h2>Section 3: Conclusion</h2>
+            <h2>카드 팩</h2>
+            <p>카드 팩을 개봉하기</p>
+          </div>
+          <div className="spacer-column" />
+          <div className="text-content" />
+        </div>
+      </motion.div>
+      <motion.div className="scroll-section" {...sectionAnimation}>
+        <div className="section-grid">
+          <div className="text-content left-text">
+            <h2>간단한 설명</h2>
             <p>
-              And finally, the conclusion, back on the left side of the screen.
+              포켓몬 카드 게임을 보고 영감을 얻어 치지직 클립을 카드로 포장하여
+              보여주는 페이지를 개발
             </p>
           </div>
           <div className="spacer-column" />
