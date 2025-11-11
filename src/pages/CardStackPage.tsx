@@ -4,7 +4,7 @@ import { useFetchChzzkClipRecommendedList } from "@/hooks/useChzzkFetch";
 import { convertChzzkPreviewClipInfoToCardData } from "@/tools/dataTool";
 
 function CardStackPage() {
-  const { data: cardList, loading, error } = useFetchChzzkClipRecommendedList();
+  const { data: cardList } = useFetchChzzkClipRecommendedList();
 
   return (
     <div>
@@ -13,7 +13,7 @@ function CardStackPage() {
           <Card
             key={index}
             card={convertChzzkPreviewClipInfoToCardData(card, index)}
-            initialCardFaceState="front"
+            initialFace="front"
           />
         ))}
       />
