@@ -18,7 +18,7 @@ const HomePage = () => {
   const sectionAnimation = {
     initial: { opacity: 0, y: 50 },
     whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" as const },
     viewport: { once: false, amount: 0.6 },
   };
 

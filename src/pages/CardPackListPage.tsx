@@ -34,13 +34,7 @@ function CardPackListPage() {
 
   const cardPacks = Object.keys(groupedPacks)
     .filter((category) => groupedPacks[category].length > 0)
-    .map((category) => (
-      <CardPack
-        key={category}
-        cardList={groupedPacks[category]}
-        packName={category}
-      />
-    ));
+    .map((category) => <CardPack key={category} packName={category} />);
 
   return <div className="card-pack-grid">{cardPacks}</div>;
 }

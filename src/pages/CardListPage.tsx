@@ -5,7 +5,7 @@ import type { ChzzkClipPreviewInfo } from "@/types";
 import "./CardListPage.css";
 
 const CardListPage = () => {
-  const { data: cardList, loading, error } = useFetchChzzkClipRecommendedList();
+  const { data: cardList } = useFetchChzzkClipRecommendedList();
 
   return (
     <div className="card-grid">
@@ -13,7 +13,7 @@ const CardListPage = () => {
         <Card
           key={index}
           card={convertChzzkPreviewClipInfoToCardData(item, index)}
-          initialCardFaceState="back"
+          initialFace="back"
         />
       ))}
     </div>
