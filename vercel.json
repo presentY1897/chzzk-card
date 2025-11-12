@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://api.chzzk.naver.com/:path*"
+    },
+    {
+      "source": "/videohub/:path*",
+      "destination": "https://api-videohub.naver.com/:path*"
+    }
+  ]
+}
