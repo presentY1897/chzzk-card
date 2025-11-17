@@ -2,12 +2,12 @@ import { Routes, Route, Link } from "react-router-dom";
 import CardPackListPage from "./pages/CardPackListPage";
 import CardListPage from "./pages/CardListPage";
 import CardStackPage from "./pages/CardStackPage";
-import "./App.css";
 import HomePage from "./pages/HomePage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App`">
+    <div className="App">
       <nav className="navigation-menu">
         <Link to="/card-pack-list">Card Packs</Link>
         <Link to="/card-list">Card List</Link>
